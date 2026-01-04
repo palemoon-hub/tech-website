@@ -98,18 +98,30 @@ body {
 
 .features .card-body {
     text-align: left !important;
+    display: flex;
+    flex-direction: column;
 }
 
 .features .card-title {
-    margin: 0 0 -3px !important;
+    margin: 0 0 15px !important;
 }
+
+.features .card-text, .pricing-list {
+    flex-grow: 1;
+}
+
 .cards {
     margin-top: 30px !important;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 .card {
     border-radius: 5px !important;
     box-shadow: none !important;
+    height: 100%;
 }
 
 .card-title {
