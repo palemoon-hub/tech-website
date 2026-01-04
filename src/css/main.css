@@ -19,6 +19,7 @@ body {
      background: transparent !important;
      color: #AD91FF !important;
      font-weight: bold !important;
+     cursor: pointer;
  }
 
  .login-btn {
@@ -120,6 +121,12 @@ body {
 .statistics {
     text-align: center !important;
     padding-top: 300px !important;
+    /* Added wave for transition to Pricing */
+    background-image: url("../assets/wavy-purple-by-nouridio.svg") !important;
+    background-position: bottom !important;
+    background-size: 200% !important;
+    background-repeat: no-repeat !important;
+    padding-bottom: 250px !important;
 }
 
 .statistics .card-body{
@@ -244,4 +251,16 @@ color: rgba(255, 255, 255, 0.46) !important
 .footer .bot-footer {
     text-align: center !important;
     color: #a2a8bd !important
+}
+
+/* Portfolio Section Override */
+.portfolio-section {
+    background: #1D1E28 !important; /* Dark background */
+    background-image: none !important; /* No wave */
+    padding-bottom: 50px !important;
+}
+
+.portfolio-section .card {
+    background-color: #2C2F33 !important; /* Lighter dark for cards */
+    border: 2px solid #AD91FF !important;
 }
