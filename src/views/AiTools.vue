@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-8">
     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
-      <h2 class="text-3xl font-bold mb-2">AI 工具聚合</h2>
-      <p class="text-blue-100">精选全球最强 AI 生产力工具，助你效率倍增。</p>
+      <h2 class="text-3xl font-bold mb-2">{{ $t('aiTools.title') }}</h2>
+      <p class="text-blue-100">{{ $t('aiTools.desc') }}</p>
     </div>
 
     <div v-for="category in categories" :key="category.title" class="space-y-4">
@@ -33,44 +33,48 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Presentation, FileText, Globe, Palette } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
 
-const categories = [
+const { t } = useI18n()
+
+const categories = computed(() => [
   {
-    title: 'PPT / 演示文稿',
+    title: t('aiTools.categories.ppt'),
     icon: Presentation,
     tools: [
-      { name: 'Gamma', url: 'https://gamma.app', description: '一键生成精美 PPT、文档和网页，支持高度自定义。', tag: '推荐' },
-      { name: 'Tome', url: 'https://tome.app', description: 'AI 驱动的讲故事工具，快速创建沉浸式演示文稿。' },
-      { name: 'Beautiful.ai', url: 'https://www.beautiful.ai', description: '智能排版设计，让你的 PPT 瞬间变专业。' },
+      { name: 'Gamma', url: 'https://gamma.app', description: t('aiTools.tools.gamma'), tag: t('aiTools.tags.recommend') },
+      { name: 'Tome', url: 'https://tome.app', description: t('aiTools.tools.tome') },
+      { name: 'Beautiful.ai', url: 'https://www.beautiful.ai', description: t('aiTools.tools.beautiful') },
     ]
   },
   {
-    title: '论文 / 写作辅助',
+    title: t('aiTools.categories.writing'),
     icon: FileText,
     tools: [
-      { name: 'ChatGPT', url: 'https://chat.openai.com', description: '最强大的通用 AI 助手，辅助写作、润色、翻译。', tag: '必备' },
-      { name: 'Claude', url: 'https://claude.ai', description: '擅长长文本分析和写作，逻辑性强，更具人性化。' },
-      { name: 'Notion AI', url: 'https://www.notion.so', description: '直接在笔记中集成 AI 写作，无缝工作流体验。' },
+      { name: 'ChatGPT', url: 'https://chat.openai.com', description: t('aiTools.tools.chatgpt'), tag: t('aiTools.tags.must') },
+      { name: 'Claude', url: 'https://claude.ai', description: t('aiTools.tools.claude') },
+      { name: 'Notion AI', url: 'https://www.notion.so', description: t('aiTools.tools.notion') },
     ]
   },
   {
-    title: '网站 / UI 生成',
+    title: t('aiTools.categories.web'),
     icon: Globe,
     tools: [
-      { name: 'v0.dev', url: 'https://v0.dev', description: 'Vercel 出品，用自然语言生成 React/Tailwind 代码。', tag: '开发' },
-      { name: 'Framer AI', url: 'https://www.framer.com', description: '输入提示词，瞬间生成高保真设计图并发布为网站。' },
-      { name: 'Dora AI', url: 'https://www.dora.run', description: '专注于生成 3D 动画效果的酷炫网站。' },
+      { name: 'v0.dev', url: 'https://v0.dev', description: t('aiTools.tools.v0'), tag: t('aiTools.tags.dev') },
+      { name: 'Framer AI', url: 'https://www.framer.com', description: t('aiTools.tools.framer') },
+      { name: 'Dora AI', url: 'https://www.dora.run', description: t('aiTools.tools.dora') },
     ]
   },
   {
-    title: '绘画 / 设计',
+    title: t('aiTools.categories.art'),
     icon: Palette,
     tools: [
-      { name: 'Midjourney', url: 'https://www.midjourney.com', description: '目前画质最强的 AI 绘画工具，艺术感极佳。', tag: '付费' },
-      { name: 'Stable Diffusion', url: 'https://stability.ai', description: '开源强大的绘画模型，可本地部署，控制力强。' },
-      { name: 'Canva', url: 'https://www.canva.com', description: '集成 AI 绘画与设计工具，小白也能做设计。' },
+      { name: 'Midjourney', url: 'https://www.midjourney.com', description: t('aiTools.tools.midjourney'), tag: t('aiTools.tags.paid') },
+      { name: 'Stable Diffusion', url: 'https://stability.ai', description: t('aiTools.tools.stable') },
+      { name: 'Canva', url: 'https://www.canva.com', description: t('aiTools.tools.canva') },
     ]
   }
-]
+])
 </script>

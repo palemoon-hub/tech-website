@@ -4,24 +4,24 @@
     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
       <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
         <QrCode class="w-4 h-4 text-gray-400" />
-        二维码生成
+        {{ $t('otherTools.qr.title') }}
       </h3>
       <div class="space-y-4">
         <textarea 
           v-model="qrText" 
-          placeholder="输入网址或文本..."
+          :placeholder="$t('otherTools.qr.placeholder')"
           class="w-full p-3 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 h-24 resize-none"
         ></textarea>
         <div class="flex justify-center p-4 bg-gray-50 rounded-lg border border-gray-100 min-h-[200px] items-center">
           <img v-if="qrDataUrl" :src="qrDataUrl" alt="QR Code" class="w-48 h-48" />
-          <span v-else class="text-gray-400 text-sm">输入文本后自动生成</span>
+          <span v-else class="text-gray-400 text-sm">{{ $t('otherTools.qr.waiting') }}</span>
         </div>
         <button 
           @click="downloadQr"
           :disabled="!qrDataUrl"
           class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          下载二维码
+          {{ $t('otherTools.qr.download') }}
         </button>
       </div>
     </div>
@@ -30,11 +30,11 @@
     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
       <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
         <Palette class="w-4 h-4 text-gray-400" />
-        颜色转换
+        {{ $t('otherTools.color.title') }}
       </h3>
       <div class="space-y-6">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">选择颜色</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ $t('otherTools.color.select') }}</label>
           <div class="flex gap-4 items-center">
             <input 
               type="color" 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
-          <div class="text-xs text-gray-500 mb-2">预览</div>
+          <div class="text-xs text-gray-500 mb-2">{{ $t('otherTools.color.preview') }}</div>
           <div 
             class="h-20 rounded-lg shadow-inner transition-colors"
             :style="{ backgroundColor: colorHex }"
@@ -80,6 +80,9 @@
 import { ref, watch, computed } from 'vue'
 import QRCode from 'qrcode'
 import { QrCode, Palette } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+useI18n()
 
 // QR Code Logic
 const qrText = ref('')

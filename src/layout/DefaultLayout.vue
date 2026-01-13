@@ -31,7 +31,10 @@
     <main class="flex-1 overflow-hidden flex flex-col">
       <header class="h-16 bg-white border-b border-gray-200 flex items-center px-8 justify-between">
         <h2 class="text-lg font-medium text-gray-800">{{ currentRouteName }}</h2>
-        <!-- Future: User profile or Theme toggle -->
+        <button @click="toggleLanguage" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+          <Globe class="w-5 h-5" />
+          <span class="text-sm font-medium">{{ locale === 'en' ? 'En' : '中' }}</span>
+        </button>
       </header>
       
       <div class="flex-1 overflow-auto p-8">
@@ -48,6 +51,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { 
   LayoutDashboard, 
   Clock, 
@@ -56,25 +60,31 @@ import {
   Scale,
   Bot, 
   MoreHorizontal,
-  Wrench
+  Wrench,
+  Globe
 } from 'lucide-vue-next'
 
 const route = useRoute()
+const { t, locale } = useI18n()
+
+const toggleLanguage = () => {
+  locale.value = locale.value === 'en' ? 'zh' : 'en'
+}
 
 const currentRouteName = computed(() => {
-  const item = navItems.find(i => i.path === route.path)
-  return item ? item.name : 'Dashboard'
+  const item = navItems.value.find(i => i.path === route.path)
+  return item ? item.name : t('app.dashboard')
 })
 
-const navItems = [
-  { name: '仪表盘', path: '/', icon: LayoutDashboard },
-  { name: '时间戳工具', path: '/timestamp', icon: Clock },
-  { name: '开发工具箱', path: '/dev-tools', icon: Code2 },
-  { name: '图片工具箱', path: '/image-tools', icon: Image },
-  { name: '单位换算', path: '/unit-converter', icon: Scale },
-  { name: 'AI 聚合站', path: '/ai-tools', icon: Bot },
-  { name: '日常工具', path: '/other-tools', icon: MoreHorizontal },
-]
+const navItems = computed(() => [
+  { name: t('nav.dashboard'), path: '/', icon: LayoutDashboard },
+  { name: t('nav.timestamp'), path: '/timestamp', icon: Clock },
+  { name: t('nav.devTools'), path: '/dev-tools', icon: Code2 },
+  { name: t('nav.imageTools'), path: '/image-tools', icon: Image },
+  { name: t('nav.unitConverter'), path: '/unit-converter', icon: Scale },
+  { name: t('nav.aiTools'), path: '/ai-tools', icon: Bot },
+  { name: t('nav.otherTools'), path: '/other-tools', icon: MoreHorizontal },
+])
 </script>
 
 <style scoped>

@@ -1,0 +1,242 @@
+{
+  "app": {
+    "title": "TechRock Tools",
+    "dashboard": "仪表盘",
+    "footer": "v1.1.0"
+  },
+  "nav": {
+    "dashboard": "仪表盘",
+    "timestamp": "时间戳工具",
+    "devTools": "开发工具箱",
+    "imageTools": "图片工具箱",
+    "unitConverter": "单位换算",
+    "aiTools": "AI 聚合站",
+    "otherTools": "日常工具"
+  },
+  "home": {
+    "heroTitle": "TechRock Tools",
+    "heroDesc": "提升效率的一站式工具箱。无论是代码开发、设计创作还是日常换算，这里都有您需要的解决方案。",
+    "searchPlaceholder": "搜索工具，例如：JSON、图片压缩、时间戳...",
+    "noResult": "未找到与 \"{query}\" 相关的工具",
+    "clearSearch": "清除搜索",
+    "categories": {
+      "dev": "开发与编程",
+      "design": "设计与媒体",
+      "life": "日常与生活"
+    },
+    "tools": {
+      "timestamp": {
+        "name": "时间戳工具",
+        "desc": "Unix 时间戳与日期互转，支持毫秒级精度。"
+      },
+      "devTools": {
+        "name": "开发工具箱",
+        "desc": "JSON 格式化、Base64、URL 编解码、正则测试。"
+      },
+      "imageTools": {
+        "name": "图片工具箱",
+        "desc": "格式转换 (JPG/PNG/WebP)、压缩、证件照换底。"
+      },
+      "aiTools": {
+        "name": "AI 聚合站",
+        "desc": "精选 AI 工具导航，涵盖 PPT、写作、绘画、编程。"
+      },
+      "unitConverter": {
+        "name": "单位换算",
+        "desc": "长度、面积、重量、体积、温度、存储换算。"
+      },
+      "otherTools": {
+        "name": "日常工具",
+        "desc": "二维码生成、颜色格式转换 (HEX/RGB)。"
+      }
+    }
+  },
+  "timestamp": {
+    "current": "当前时间",
+    "pause": "暂停",
+    "resume": "继续",
+    "tsToDate": "时间戳转日期",
+    "dateToTs": "日期转时间戳",
+    "inputPlaceholder": "输入时间戳",
+    "unitMs": "毫秒 (ms)",
+    "unitS": "秒 (s)",
+    "result": "转换结果",
+    "waiting": "等待输入...",
+    "invalid": "无效的时间戳",
+    "dateTime": "日期时间"
+  },
+  "devTools": {
+    "nav": {
+      "json": "JSON 工具",
+      "base64": "Base64",
+      "url": "URL 编解码",
+      "hash": "哈希/加密",
+      "regex": "正则测试"
+    },
+    "json": {
+      "input": "输入 JSON",
+      "format": "格式化",
+      "minify": "压缩",
+      "result": "结果"
+    },
+    "base64": {
+      "encode": "编码 (Encode)",
+      "decode": "解码 (Decode)",
+      "input": "输入文本",
+      "output": "输出结果"
+    },
+    "url": {
+      "encode": "URL 编码",
+      "decode": "URL 解码",
+      "input": "输入",
+      "output": "输出"
+    },
+    "hash": {
+      "input": "输入文本",
+      "copy": "复制"
+    },
+    "regex": {
+      "pattern": "正则表达式 (JS)",
+      "flags": "修饰符",
+      "text": "测试文本",
+      "result": "匹配结果",
+      "noMatch": "无匹配"
+    }
+  },
+  "imageTools": {
+    "nav": {
+      "convert": "格式转换",
+      "idphoto": "证件照换底",
+      "compress": "图片压缩"
+    },
+    "convert": {
+      "title": "格式转换",
+      "upload": "点击上传图片 (JPG/PNG/WEBP/GIF)",
+      "selected": "已选择: {name}",
+      "target": "目标格式",
+      "start": "开始转换并下载"
+    },
+    "idphoto": {
+      "uploadTitle": "上传照片",
+      "uploadDesc": "点击上传或拖拽",
+      "bgTitle": "选择底色",
+      "download": "保存图片",
+      "preview": "预览区域",
+      "colors": {
+        "white": "白底",
+        "blue": "蓝底",
+        "red": "红底",
+        "gray": "灰底"
+      }
+    },
+    "compress": {
+      "title": "图片压缩",
+      "upload": "上传图片",
+      "quality": "压缩质量",
+      "start": "开始压缩",
+      "done": "压缩完成",
+      "download": "下载"
+    }
+  },
+  "aiTools": {
+    "title": "AI 工具聚合",
+    "desc": "精选全球最强 AI 生产力工具，助你效率倍增。",
+    "categories": {
+      "ppt": "PPT / 演示文稿",
+      "writing": "论文 / 写作辅助",
+      "web": "网站 / UI 生成",
+      "art": "绘画 / 设计"
+    },
+    "tools": {
+      "gamma": "一键生成精美 PPT、文档和网页，支持高度自定义。",
+      "tome": "AI 驱动的讲故事工具，快速创建沉浸式演示文稿。",
+      "beautiful": "智能排版设计，让你的 PPT 瞬间变专业。",
+      "chatgpt": "最强大的通用 AI 助手，辅助写作、润色、翻译。",
+      "claude": "擅长长文本分析和写作，逻辑性强，更具人性化。",
+      "notion": "直接在笔记中集成 AI 写作，无缝工作流体验。",
+      "v0": "Vercel 出品，用自然语言生成 React/Tailwind 代码。",
+      "framer": "输入提示词，瞬间生成高保真设计图并发布为网站。",
+      "dora": "专注于生成 3D 动画效果的酷炫网站。",
+      "midjourney": "目前画质最强的 AI 绘画工具，艺术感极佳。",
+      "stable": "开源强大的绘画模型，可本地部署，控制力强。",
+      "canva": "集成 AI 绘画与设计工具，小白也能做设计。"
+    },
+    "tags": {
+      "recommend": "推荐",
+      "must": "必备",
+      "dev": "开发",
+      "paid": "付费"
+    }
+  },
+  "unitConverter": {
+    "title": "单位转换",
+    "inputLabel": "输入数值",
+    "resultLabel": "转换结果",
+    "categories": {
+      "length": "长度",
+      "area": "面积",
+      "weight": "重量",
+      "volume": "体积",
+      "temperature": "温度",
+      "data": "数据存储"
+    },
+    "units": {
+      "km": "千米",
+      "m": "米",
+      "cm": "厘米",
+      "mm": "毫米",
+      "mi": "英里",
+      "yd": "码",
+      "ft": "英尺",
+      "in": "英寸",
+      "km2": "平方千米",
+      "m2": "平方米",
+      "cm2": "平方厘米",
+      "ha": "公顷",
+      "mu": "亩",
+      "mi2": "平方英里",
+      "ac": "英亩",
+      "t": "吨",
+      "kg": "千克",
+      "g": "克",
+      "mg": "毫克",
+      "lb": "磅",
+      "oz": "盎司",
+      "m3": "立方米",
+      "l": "升",
+      "ml": "毫升",
+      "gal": "加仑(美)",
+      "c": "摄氏度",
+      "f": "华氏度",
+      "k": "开尔文",
+      "tb": "TB",
+      "gb": "GB",
+      "mb": "MB",
+      "kb": "KB",
+      "byte": "Byte"
+    },
+    "common": {
+      "title": "常用换算",
+      "dataTitle": "数据存储",
+      "tempTitle": "温度"
+    }
+  },
+  "otherTools": {
+    "qr": {
+      "title": "二维码生成",
+      "placeholder": "输入网址或文本...",
+      "waiting": "输入文本后自动生成",
+      "download": "下载二维码"
+    },
+    "color": {
+      "title": "颜色转换",
+      "select": "选择颜色",
+      "preview": "预览"
+    }
+  },
+  "seo": {
+    "title": "TechRock Tools - 开发者与设计师的一站式工具箱",
+    "keywords": "开发者工具, 在线工具, 时间戳转换, JSON格式化, 图片压缩, 证件照换底, 单位换算, AI工具, TechRock, 免费工具站",
+    "description": "TechRock Tools (teckrock.top) 提供时间戳转换、JSON格式化、图片处理、单位换算、AI工具导航等全方位在线工具，提升您的工作效率。"
+  }
+}

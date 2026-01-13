@@ -18,7 +18,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr,auto,1fr] gap-6 items-center">
         <!-- Input -->
         <div class="space-y-4">
-          <label class="block text-sm font-medium text-gray-700">输入数值</label>
+          <label class="block text-sm font-medium text-gray-700">{{ $t('unitConverter.inputLabel') }}</label>
           <input 
             v-model="inputValue" 
             type="number" 
@@ -46,7 +46,7 @@
 
         <!-- Output -->
         <div class="space-y-4">
-          <label class="block text-sm font-medium text-gray-700">转换结果</label>
+          <label class="block text-sm font-medium text-gray-700">{{ $t('unitConverter.resultLabel') }}</label>
           <div class="w-full text-2xl p-4 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 font-medium break-all min-h-[4.5rem] flex items-center">
             {{ outputValue }}
           </div>
@@ -65,19 +65,19 @@
     <!-- Common Formulas Reference (Optional) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 text-sm text-blue-800">
-        <strong class="block mb-1">常用换算</strong>
+        <strong class="block mb-1">{{ $t('unitConverter.common.title') }}</strong>
         1 km = 1000 m<br>
         1 m = 100 cm<br>
         1 inch = 2.54 cm
       </div>
       <div class="bg-green-50 p-4 rounded-lg border border-green-100 text-sm text-green-800">
-        <strong class="block mb-1">数据存储</strong>
+        <strong class="block mb-1">{{ $t('unitConverter.common.dataTitle') }}</strong>
         1 KB = 1024 B<br>
         1 MB = 1024 KB<br>
         1 GB = 1024 MB
       </div>
       <div class="bg-purple-50 p-4 rounded-lg border border-purple-100 text-sm text-purple-800">
-        <strong class="block mb-1">温度</strong>
+        <strong class="block mb-1">{{ $t('unitConverter.common.tempTitle') }}</strong>
         C = (F - 32) * 5/9<br>
         F = C * 9/5 + 32
       </div>
@@ -87,82 +87,85 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const categories = [
-  { id: 'length', name: '长度' },
-  { id: 'area', name: '面积' },
-  { id: 'weight', name: '重量' },
-  { id: 'volume', name: '体积' },
-  { id: 'temperature', name: '温度' },
-  { id: 'data', name: '数据存储' },
-]
+const { t } = useI18n()
+
+const categories = computed(() => [
+  { id: 'length', name: t('unitConverter.categories.length') },
+  { id: 'area', name: t('unitConverter.categories.area') },
+  { id: 'weight', name: t('unitConverter.categories.weight') },
+  { id: 'volume', name: t('unitConverter.categories.volume') },
+  { id: 'temperature', name: t('unitConverter.categories.temperature') },
+  { id: 'data', name: t('unitConverter.categories.data') },
+])
 
 const currentCategory = ref('length')
 const inputValue = ref<number | ''>(1)
 
 // Unit Definitions & Conversion Logic
 // Base unit for conversion (e.g., meters for length, grams for weight)
-const units: Record<string, { label: string; value: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]> = {
+const units = computed<Record<string, { label: string; value: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]>>(() => ({
   length: [
-    { label: '千米', value: 'km', toBase: v => v * 1000, fromBase: v => v / 1000 },
-    { label: '米', value: 'm', toBase: v => v, fromBase: v => v },
-    { label: '厘米', value: 'cm', toBase: v => v * 0.01, fromBase: v => v / 0.01 },
-    { label: '毫米', value: 'mm', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
-    { label: '英里', value: 'mi', toBase: v => v * 1609.34, fromBase: v => v / 1609.34 },
-    { label: '码', value: 'yd', toBase: v => v * 0.9144, fromBase: v => v / 0.9144 },
-    { label: '英尺', value: 'ft', toBase: v => v * 0.3048, fromBase: v => v / 0.3048 },
-    { label: '英寸', value: 'in', toBase: v => v * 0.0254, fromBase: v => v / 0.0254 },
+    { label: t('unitConverter.units.km'), value: 'km', toBase: v => v * 1000, fromBase: v => v / 1000 },
+    { label: t('unitConverter.units.m'), value: 'm', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.cm'), value: 'cm', toBase: v => v * 0.01, fromBase: v => v / 0.01 },
+    { label: t('unitConverter.units.mm'), value: 'mm', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
+    { label: t('unitConverter.units.mi'), value: 'mi', toBase: v => v * 1609.34, fromBase: v => v / 1609.34 },
+    { label: t('unitConverter.units.yd'), value: 'yd', toBase: v => v * 0.9144, fromBase: v => v / 0.9144 },
+    { label: t('unitConverter.units.ft'), value: 'ft', toBase: v => v * 0.3048, fromBase: v => v / 0.3048 },
+    { label: t('unitConverter.units.in'), value: 'in', toBase: v => v * 0.0254, fromBase: v => v / 0.0254 },
   ],
   area: [
-    { label: '平方千米', value: 'km2', toBase: v => v * 1e6, fromBase: v => v / 1e6 },
-    { label: '平方米', value: 'm2', toBase: v => v, fromBase: v => v },
-    { label: '平方厘米', value: 'cm2', toBase: v => v * 0.0001, fromBase: v => v / 0.0001 },
-    { label: '公顷', value: 'ha', toBase: v => v * 10000, fromBase: v => v / 10000 },
-    { label: '亩', value: 'mu', toBase: v => v * 666.667, fromBase: v => v / 666.667 },
-    { label: '平方英里', value: 'mi2', toBase: v => v * 2.59e6, fromBase: v => v / 2.59e6 },
-    { label: '英亩', value: 'ac', toBase: v => v * 4046.86, fromBase: v => v / 4046.86 },
+    { label: t('unitConverter.units.km2'), value: 'km2', toBase: v => v * 1e6, fromBase: v => v / 1e6 },
+    { label: t('unitConverter.units.m2'), value: 'm2', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.cm2'), value: 'cm2', toBase: v => v * 0.0001, fromBase: v => v / 0.0001 },
+    { label: t('unitConverter.units.ha'), value: 'ha', toBase: v => v * 10000, fromBase: v => v / 10000 },
+    { label: t('unitConverter.units.mu'), value: 'mu', toBase: v => v * 666.667, fromBase: v => v / 666.667 },
+    { label: t('unitConverter.units.mi2'), value: 'mi2', toBase: v => v * 2.59e6, fromBase: v => v / 2.59e6 },
+    { label: t('unitConverter.units.ac'), value: 'ac', toBase: v => v * 4046.86, fromBase: v => v / 4046.86 },
   ],
   weight: [
-    { label: '吨', value: 't', toBase: v => v * 1000, fromBase: v => v / 1000 },
-    { label: '千克', value: 'kg', toBase: v => v, fromBase: v => v },
-    { label: '克', value: 'g', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
-    { label: '毫克', value: 'mg', toBase: v => v * 1e-6, fromBase: v => v / 1e-6 },
-    { label: '磅', value: 'lb', toBase: v => v * 0.453592, fromBase: v => v / 0.453592 },
-    { label: '盎司', value: 'oz', toBase: v => v * 0.0283495, fromBase: v => v / 0.0283495 },
+    { label: t('unitConverter.units.t'), value: 't', toBase: v => v * 1000, fromBase: v => v / 1000 },
+    { label: t('unitConverter.units.kg'), value: 'kg', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.g'), value: 'g', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
+    { label: t('unitConverter.units.mg'), value: 'mg', toBase: v => v * 1e-6, fromBase: v => v / 1e-6 },
+    { label: t('unitConverter.units.lb'), value: 'lb', toBase: v => v * 0.453592, fromBase: v => v / 0.453592 },
+    { label: t('unitConverter.units.oz'), value: 'oz', toBase: v => v * 0.0283495, fromBase: v => v / 0.0283495 },
   ],
   volume: [
-    { label: '立方米', value: 'm3', toBase: v => v, fromBase: v => v },
-    { label: '升', value: 'l', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
-    { label: '毫升', value: 'ml', toBase: v => v * 1e-6, fromBase: v => v / 1e-6 },
-    { label: '加仑(美)', value: 'gal', toBase: v => v * 0.00378541, fromBase: v => v / 0.00378541 },
+    { label: t('unitConverter.units.m3'), value: 'm3', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.l'), value: 'l', toBase: v => v * 0.001, fromBase: v => v / 0.001 },
+    { label: t('unitConverter.units.ml'), value: 'ml', toBase: v => v * 1e-6, fromBase: v => v / 1e-6 },
+    { label: t('unitConverter.units.gal'), value: 'gal', toBase: v => v * 0.00378541, fromBase: v => v / 0.00378541 },
   ],
   temperature: [
-    { label: '摄氏度', value: 'c', toBase: v => v, fromBase: v => v },
-    { label: '华氏度', value: 'f', toBase: v => (v - 32) * 5/9, fromBase: v => v * 9/5 + 32 },
-    { label: '开尔文', value: 'k', toBase: v => v - 273.15, fromBase: v => v + 273.15 },
+    { label: t('unitConverter.units.c'), value: 'c', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.f'), value: 'f', toBase: v => (v - 32) * 5/9, fromBase: v => v * 9/5 + 32 },
+    { label: t('unitConverter.units.k'), value: 'k', toBase: v => v - 273.15, fromBase: v => v + 273.15 },
   ],
   data: [
-    { label: 'TB', value: 'tb', toBase: v => v * 1024 * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024 * 1024) },
-    { label: 'GB', value: 'gb', toBase: v => v * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024) },
-    { label: 'MB', value: 'mb', toBase: v => v * 1024 * 1024, fromBase: v => v / (1024 * 1024) },
-    { label: 'KB', value: 'kb', toBase: v => v * 1024, fromBase: v => v / 1024 },
-    { label: 'Byte', value: 'b', toBase: v => v, fromBase: v => v },
+    { label: t('unitConverter.units.tb'), value: 'tb', toBase: v => v * 1024 * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024 * 1024) },
+    { label: t('unitConverter.units.gb'), value: 'gb', toBase: v => v * 1024 * 1024 * 1024, fromBase: v => v / (1024 * 1024 * 1024) },
+    { label: t('unitConverter.units.mb'), value: 'mb', toBase: v => v * 1024 * 1024, fromBase: v => v / (1024 * 1024) },
+    { label: t('unitConverter.units.kb'), value: 'kb', toBase: v => v * 1024, fromBase: v => v / 1024 },
+    { label: t('unitConverter.units.byte'), value: 'b', toBase: v => v, fromBase: v => v },
   ]
-}
+}))
 
-const currentUnits = computed(() => units[currentCategory.value] || [])
+const currentUnits = computed(() => units.value[currentCategory.value] || [])
 const inputUnit = ref('')
 const outputUnit = ref('')
 
 // Initialize units when category changes
 watch(currentCategory, (newVal) => {
-  const list = units[newVal]
+  const list = units.value[newVal]
   if (list && list.length >= 2) {
-    inputUnit.value = list[0].value
-    outputUnit.value = list[1].value
+    inputUnit.value = list[0]!.value
+    outputUnit.value = list[1]!.value
   } else if (list && list.length === 1) {
-    inputUnit.value = list[0].value
-    outputUnit.value = list[0].value
+    inputUnit.value = list[0]!.value
+    outputUnit.value = list[0]!.value
   }
 }, { immediate: true })
 
@@ -170,8 +173,8 @@ const outputValue = computed(() => {
   if (inputValue.value === '' || inputValue.value === null) return '---'
   
   const unitList = currentUnits.value
-  const from = unitList.find(u => u.value === inputUnit.value)
-  const to = unitList.find(u => u.value === outputUnit.value)
+  const from = unitList.find((u: any) => u.value === inputUnit.value)
+  const to = unitList.find((u: any) => u.value === outputUnit.value)
   
   if (!from || !to) return '---'
 

@@ -20,23 +20,23 @@
       <!-- 1. Image Converter -->
       <div v-if="currentTool === 'convert'" class="h-full flex flex-col gap-6">
         <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 class="font-medium text-gray-900 mb-4">格式转换</h3>
+          <h3 class="font-medium text-gray-900 mb-4">{{ $t('imageTools.convert.title') }}</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="space-y-4">
               <div class="border-2 border-dashed border-gray-300 rounded-lg h-48 flex flex-col items-center justify-center hover:bg-gray-50 transition-colors cursor-pointer relative">
                 <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" @change="handleConvertFile" />
                 <Upload class="w-8 h-8 text-gray-400 mb-2" />
-                <span class="text-sm text-gray-500">点击上传图片 (JPG/PNG/WEBP/GIF)</span>
+                <span class="text-sm text-gray-500">{{ $t('imageTools.convert.upload') }}</span>
               </div>
               <div v-if="convertSource" class="text-sm text-green-600 flex items-center gap-2">
                 <CheckCircle class="w-4 h-4" />
-                已选择: {{ convertSource.name }}
+                {{ $t('imageTools.convert.selected', { name: convertSource.name }) }}
               </div>
             </div>
 
             <div class="space-y-4 flex flex-col justify-center">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">目标格式</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('imageTools.convert.target') }}</label>
                 <select v-model="targetFormat" class="w-full p-3 rounded-lg border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
                   <option value="image/jpeg">JPG / JPEG</option>
                   <option value="image/png">PNG</option>
@@ -49,7 +49,7 @@
                 :disabled="!convertSource"
                 class="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
               >
-                开始转换并下载
+                {{ $t('imageTools.convert.start') }}
               </button>
             </div>
           </div>
@@ -61,17 +61,17 @@
         <!-- Reuse previous IdPhoto Logic -->
         <div class="w-full md:w-80 flex flex-col gap-6 bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-fit">
           <div>
-            <h3 class="font-medium text-gray-900 mb-4">上传照片</h3>
+            <h3 class="font-medium text-gray-900 mb-4">{{ $t('imageTools.idphoto.uploadTitle') }}</h3>
             <label class="block w-full cursor-pointer">
               <div class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 <Upload class="w-8 h-8 text-gray-400 mb-2" />
-                <span class="text-sm text-gray-500">点击上传或拖拽</span>
+                <span class="text-sm text-gray-500">{{ $t('imageTools.idphoto.uploadDesc') }}</span>
               </div>
               <input type="file" class="hidden" accept="image/*" @change="handleIdFileChange" />
             </label>
           </div>
           <div>
-            <h3 class="font-medium text-gray-900 mb-4">选择底色</h3>
+            <h3 class="font-medium text-gray-900 mb-4">{{ $t('imageTools.idphoto.bgTitle') }}</h3>
             <div class="grid grid-cols-4 gap-3">
               <button 
                 v-for="color in idColors" 
@@ -92,7 +92,7 @@
             :disabled="!idImageUrl"
             class="w-full py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
           >
-            <Download class="w-4 h-4" /> 保存图片
+            <Download class="w-4 h-4" /> {{ $t('imageTools.idphoto.download') }}
           </button>
         </div>
         <div class="flex-1 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center p-8 overflow-hidden relative min-h-[400px]">
@@ -101,7 +101,7 @@
           </div>
           <div v-else class="text-center text-gray-400">
             <Image class="w-16 h-16 mx-auto mb-4 opacity-50" />
-            <p>预览区域</p>
+            <p>{{ $t('imageTools.idphoto.preview') }}</p>
           </div>
         </div>
       </div>
@@ -109,13 +109,13 @@
       <!-- 3. Image Compression -->
       <div v-if="currentTool === 'compress'" class="h-full flex flex-col gap-6">
         <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 class="font-medium text-gray-900 mb-4">图片压缩</h3>
+          <h3 class="font-medium text-gray-900 mb-4">{{ $t('imageTools.compress.title') }}</h3>
           <div class="space-y-6">
             <div class="border-2 border-dashed border-gray-300 rounded-lg h-32 flex flex-col items-center justify-center hover:bg-gray-50 transition-colors cursor-pointer relative">
               <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" @change="handleCompressFile" />
               <div v-if="!compressSource" class="flex flex-col items-center">
                 <Upload class="w-8 h-8 text-gray-400 mb-2" />
-                <span class="text-sm text-gray-500">上传图片</span>
+                <span class="text-sm text-gray-500">{{ $t('imageTools.compress.upload') }}</span>
               </div>
               <div v-else class="flex flex-col items-center text-green-600">
                 <CheckCircle class="w-8 h-8 mb-2" />
@@ -126,7 +126,7 @@
             <div v-if="compressSource" class="space-y-4">
               <div>
                 <label class="flex justify-between text-sm font-medium text-gray-700 mb-2">
-                  <span>压缩质量</span>
+                  <span>{{ $t('imageTools.compress.quality') }}</span>
                   <span>{{ compressQuality }}%</span>
                 </label>
                 <input 
@@ -140,20 +140,20 @@
               
               <div class="flex gap-4">
                 <button @click="processCompression" class="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  开始压缩
+                  {{ $t('imageTools.compress.start') }}
                 </button>
               </div>
 
               <div v-if="compressedResult" class="p-4 bg-green-50 rounded-lg border border-green-100 flex justify-between items-center">
                 <div>
-                  <div class="text-sm font-medium text-green-800">压缩完成</div>
+                  <div class="text-sm font-medium text-green-800">{{ $t('imageTools.compress.done') }}</div>
                   <div class="text-xs text-green-600">
                     {{ formatSize(compressSource.size) }} -> {{ formatSize(compressedResult.size) }} 
                     <span class="font-bold">(-{{ Math.round((1 - compressedResult.size / compressSource.size) * 100) }}%)</span>
                   </div>
                 </div>
                 <button @click="downloadCompressed" class="px-4 py-2 bg-white border border-green-200 text-green-700 rounded-lg hover:bg-green-100 text-sm">
-                  下载
+                  {{ $t('imageTools.compress.download') }}
                 </button>
               </div>
             </div>
@@ -166,16 +166,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Image, FileType, Upload, Download, CheckCircle, Minimize2 } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const currentTool = ref('convert')
 
-const tools = [
-  { id: 'convert', name: '格式转换', icon: FileType },
-  { id: 'idphoto', name: '证件照换底', icon: Image },
-  { id: 'compress', name: '图片压缩', icon: Minimize2 },
-]
+const tools = computed(() => [
+  { id: 'convert', name: t('imageTools.nav.convert'), icon: FileType },
+  { id: 'idphoto', name: t('imageTools.nav.idphoto'), icon: Image },
+  { id: 'compress', name: t('imageTools.nav.compress'), icon: Minimize2 },
+])
 
 // --- Format Converter Logic ---
 const convertSource = ref<File | null>(null)
@@ -220,12 +222,12 @@ const processConversion = () => {
 // --- ID Photo Logic ---
 const idImageUrl = ref<string | null>(null)
 const selectedIdColor = ref('#ffffff')
-const idColors = [
-  { name: '白底', value: '#ffffff' },
-  { name: '蓝底', value: '#438edb' },
-  { name: '红底', value: '#d9001b' },
-  { name: '灰底', value: '#808080' },
-]
+const idColors = computed(() => [
+  { name: t('imageTools.idphoto.colors.white'), value: '#ffffff' },
+  { name: t('imageTools.idphoto.colors.blue'), value: '#438edb' },
+  { name: t('imageTools.idphoto.colors.red'), value: '#d9001b' },
+  { name: t('imageTools.idphoto.colors.gray'), value: '#808080' },
+])
 
 const handleIdFileChange = (e: Event) => {
   const file = (e.target as HTMLInputElement).files?.[0]

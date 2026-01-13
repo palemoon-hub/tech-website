@@ -7,9 +7,9 @@
       </div>
       
       <div class="relative z-10 max-w-2xl">
-        <h1 class="text-3xl md:text-5xl font-bold mb-4">TechRock Tools</h1>
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">{{ $t('home.heroTitle') }}</h1>
         <p class="text-blue-100 text-lg mb-8 leading-relaxed">
-          提升效率的一站式工具箱。无论是代码开发、设计创作还是日常换算，这里都有您需要的解决方案。
+          {{ $t('home.heroDesc') }}
         </p>
         
         <!-- Search Bar -->
@@ -21,7 +21,7 @@
             v-model="searchQuery"
             type="text" 
             class="block w-full pl-11 pr-4 py-4 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-lg" 
-            placeholder="搜索工具，例如：JSON、图片压缩、时间戳..." 
+            :placeholder="$t('home.searchPlaceholder')" 
           />
         </div>
       </div>
@@ -68,38 +68,40 @@
     <!-- Empty State -->
     <div v-else class="text-center py-12 text-gray-500">
       <SearchX class="w-16 h-16 mx-auto text-gray-300 mb-4" />
-      <p class="text-lg">未找到与 "{{ searchQuery }}" 相关的工具</p>
-      <button @click="searchQuery = ''" class="mt-4 text-blue-600 hover:underline">清除搜索</button>
+      <p class="text-lg">{{ $t('home.noResult', { query: searchQuery }) }}</p>
+      <button @click="searchQuery = ''" class="mt-4 text-blue-600 hover:underline">{{ $t('home.clearSearch') }}</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { 
   Clock, Code2, Image, Scale, Bot, MoreHorizontal, 
   Wrench, Search, SearchX, Terminal, Palette, Coffee 
 } from 'lucide-vue-next'
 
+const { t } = useI18n()
 const searchQuery = ref('')
 
 // Tool Data with Categories
-const categories = [
+const categories = computed(() => [
   {
-    title: '开发与编程',
+    title: t('home.categories.dev'),
     icon: Terminal,
     tools: [
       { 
-        name: '时间戳工具', 
-        description: 'Unix 时间戳与日期互转，支持毫秒级精度。', 
+        name: t('home.tools.timestamp.name'), 
+        description: t('home.tools.timestamp.desc'), 
         path: '/timestamp',
         icon: Clock,
         color: 'bg-emerald-500',
         tags: ['Date', 'Unix', 'Time']
       },
       { 
-        name: '开发工具箱', 
-        description: 'JSON 格式化、Base64、URL 编解码、正则测试。', 
+        name: t('home.tools.devTools.name'), 
+        description: t('home.tools.devTools.desc'), 
         path: '/dev-tools',
         icon: Code2,
         color: 'bg-blue-600',
@@ -108,20 +110,20 @@ const categories = [
     ]
   },
   {
-    title: '设计与媒体',
+    title: t('home.categories.design'),
     icon: Palette,
     tools: [
       { 
-        name: '图片工具箱', 
-        description: '格式转换 (JPG/PNG/WebP)、压缩、证件照换底。', 
+        name: t('home.tools.imageTools.name'), 
+        description: t('home.tools.imageTools.desc'), 
         path: '/image-tools',
         icon: Image,
         color: 'bg-purple-500',
         tags: ['Convert', 'Compress', 'ID Photo']
       },
       { 
-        name: 'AI 聚合站', 
-        description: '精选 AI 工具导航，涵盖 PPT、写作、绘画、编程。', 
+        name: t('home.tools.aiTools.name'), 
+        description: t('home.tools.aiTools.desc'), 
         path: '/ai-tools',
         icon: Bot,
         color: 'bg-indigo-500',
@@ -130,20 +132,20 @@ const categories = [
     ]
   },
   {
-    title: '日常与生活',
+    title: t('home.categories.life'),
     icon: Coffee,
     tools: [
       { 
-        name: '单位换算', 
-        description: '长度、面积、重量、体积、温度、存储换算。', 
+        name: t('home.tools.unitConverter.name'), 
+        description: t('home.tools.unitConverter.desc'), 
         path: '/unit-converter',
         icon: Scale,
         color: 'bg-orange-500',
         tags: ['Metric', 'Imperial', 'Data']
       },
       { 
-        name: '日常工具', 
-        description: '二维码生成、颜色格式转换 (HEX/RGB)。', 
+        name: t('home.tools.otherTools.name'), 
+        description: t('home.tools.otherTools.desc'), 
         path: '/other-tools',
         icon: MoreHorizontal,
         color: 'bg-pink-500',
@@ -151,15 +153,15 @@ const categories = [
       },
     ]
   }
-]
+])
 
 // Search Logic
 const filteredCategories = computed(() => {
-  if (!searchQuery.value.trim()) return categories
+  if (!searchQuery.value.trim()) return categories.value
   
   const query = searchQuery.value.toLowerCase()
   
-  return categories.map(cat => {
+  return categories.value.map(cat => {
     const matchingTools = cat.tools.filter(tool => 
       tool.name.toLowerCase().includes(query) || 
       tool.description.toLowerCase().includes(query) ||

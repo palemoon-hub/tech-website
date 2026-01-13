@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <!-- Header -->
     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <h2 class="text-lg font-semibold mb-2">当前时间</h2>
+      <h2 class="text-lg font-semibold mb-2">{{ $t('timestamp.current') }}</h2>
       <div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
         <div class="text-4xl font-mono text-blue-600 font-bold tracking-wider">
           {{ currentTimestamp }}
@@ -15,7 +15,7 @@
           class="px-4 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
           :class="{ 'text-red-600 border-red-200 bg-red-50': isPaused }"
         >
-          {{ isPaused ? '继续' : '暂停' }}
+          {{ isPaused ? $t('timestamp.resume') : $t('timestamp.pause') }}
         </button>
       </div>
     </div>
@@ -26,30 +26,30 @@
       <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
         <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
           <ArrowRightLeft class="w-4 h-4 text-gray-400" />
-          时间戳转日期
+          {{ $t('timestamp.tsToDate') }}
         </h3>
         
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">时间戳 (ms/s)</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{{ $t('timestamp.inputPlaceholder') }}</label>
             <div class="flex gap-2">
               <input 
                 v-model="inputTimestamp" 
                 type="text" 
-                placeholder="输入时间戳"
+                :placeholder="$t('timestamp.inputPlaceholder')"
                 class="flex-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 font-mono"
               />
               <select v-model="timestampUnit" class="rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                <option value="ms">毫秒 (ms)</option>
-                <option value="s">秒 (s)</option>
+                <option value="ms">{{ $t('timestamp.unitMs') }}</option>
+                <option value="s">{{ $t('timestamp.unitS') }}</option>
               </select>
             </div>
           </div>
 
           <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
-            <div class="text-xs text-gray-500 mb-1">转换结果</div>
+            <div class="text-xs text-gray-500 mb-1">{{ $t('timestamp.result') }}</div>
             <div class="font-mono text-gray-900 break-all">
-              {{ convertedDate || '等待输入...' }}
+              {{ convertedDate || $t('timestamp.waiting') }}
             </div>
           </div>
         </div>
@@ -59,12 +59,12 @@
       <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
         <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
           <ArrowRightLeft class="w-4 h-4 text-gray-400" />
-          日期转时间戳
+          {{ $t('timestamp.dateToTs') }}
         </h3>
         
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">日期时间</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{{ $t('timestamp.dateTime') }}</label>
             <input 
               v-model="inputDate" 
               type="datetime-local" 
@@ -74,7 +74,7 @@
           </div>
 
           <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
-            <div class="text-xs text-gray-500 mb-1">转换结果 (毫秒 / 秒)</div>
+            <div class="text-xs text-gray-500 mb-1">{{ $t('timestamp.result') }}</div>
             <div class="font-mono text-gray-900 flex gap-4">
               <div>
                 <span class="text-gray-400 text-xs mr-1">ms:</span>
@@ -94,8 +94,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { format, fromUnixTime, isValid } from 'date-fns'
+import { format, isValid } from 'date-fns'
 import { ArrowRightLeft } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 // Current Time Logic
 const now = ref(new Date())
@@ -129,14 +132,14 @@ const convertedDate = computed(() => {
   if (!inputTimestamp.value) return ''
   
   let ts = parseInt(inputTimestamp.value)
-  if (isNaN(ts)) return '无效的时间戳'
+  if (isNaN(ts)) return t('timestamp.invalid')
 
   if (timestampUnit.value === 's') {
     ts = ts * 1000
   }
 
   const date = new Date(ts)
-  if (!isValid(date)) return '无效的时间戳'
+  if (!isValid(date)) return t('timestamp.invalid')
 
   return format(date, 'yyyy-MM-dd HH:mm:ss')
 })

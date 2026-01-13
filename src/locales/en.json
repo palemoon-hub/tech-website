@@ -1,0 +1,242 @@
+{
+  "app": {
+    "title": "TechRock Tools",
+    "dashboard": "Dashboard",
+    "footer": "v1.1.0"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "timestamp": "Timestamp",
+    "devTools": "Dev Tools",
+    "imageTools": "Image Tools",
+    "unitConverter": "Unit Converter",
+    "aiTools": "AI Hub",
+    "otherTools": "Daily Tools"
+  },
+  "home": {
+    "heroTitle": "TechRock Tools",
+    "heroDesc": "One-stop toolbox to boost your efficiency. Whether it's coding, design, or daily conversion, we have the solutions you need.",
+    "searchPlaceholder": "Search tools, e.g., JSON, Image, Timestamp...",
+    "noResult": "No tools found for \"{query}\"",
+    "clearSearch": "Clear Search",
+    "categories": {
+      "dev": "Development",
+      "design": "Design & Media",
+      "life": "Daily & Life"
+    },
+    "tools": {
+      "timestamp": {
+        "name": "Timestamp Tool",
+        "desc": "Convert between Unix timestamp and date with millisecond precision."
+      },
+      "devTools": {
+        "name": "Dev Toolbox",
+        "desc": "JSON format, Base64, URL encode/decode, Regex test."
+      },
+      "imageTools": {
+        "name": "Image Toolbox",
+        "desc": "Format convert (JPG/PNG/WebP), compress, ID photo background."
+      },
+      "aiTools": {
+        "name": "AI Hub",
+        "desc": "Curated AI tools navigation, covering PPT, writing, drawing, coding."
+      },
+      "unitConverter": {
+        "name": "Unit Converter",
+        "desc": "Length, area, weight, volume, temperature, storage conversion."
+      },
+      "otherTools": {
+        "name": "Daily Tools",
+        "desc": "QR code generator, Color format conversion (HEX/RGB)."
+      }
+    }
+  },
+  "timestamp": {
+    "current": "Current Time",
+    "pause": "Pause",
+    "resume": "Resume",
+    "tsToDate": "Timestamp to Date",
+    "dateToTs": "Date to Timestamp",
+    "inputPlaceholder": "Enter timestamp",
+    "unitMs": "Milliseconds (ms)",
+    "unitS": "Seconds (s)",
+    "result": "Result",
+    "waiting": "Waiting for input...",
+    "invalid": "Invalid timestamp",
+    "dateTime": "Date Time"
+  },
+  "devTools": {
+    "nav": {
+      "json": "JSON Tools",
+      "base64": "Base64",
+      "url": "URL Encode/Decode",
+      "hash": "Hash/Crypto",
+      "regex": "Regex Tester"
+    },
+    "json": {
+      "input": "Input JSON",
+      "format": "Format",
+      "minify": "Minify",
+      "result": "Result"
+    },
+    "base64": {
+      "encode": "Encode",
+      "decode": "Decode",
+      "input": "Input Text",
+      "output": "Output Result"
+    },
+    "url": {
+      "encode": "URL Encode",
+      "decode": "URL Decode",
+      "input": "Input",
+      "output": "Output"
+    },
+    "hash": {
+      "input": "Input Text",
+      "copy": "Copy"
+    },
+    "regex": {
+      "pattern": "Regular Expression (JS)",
+      "flags": "Flags",
+      "text": "Test Text",
+      "result": "Match Result",
+      "noMatch": "No Match"
+    }
+  },
+  "imageTools": {
+    "nav": {
+      "convert": "Format Convert",
+      "idphoto": "ID Photo",
+      "compress": "Compress"
+    },
+    "convert": {
+      "title": "Format Converter",
+      "upload": "Click to upload image (JPG/PNG/WEBP/GIF)",
+      "selected": "Selected: {name}",
+      "target": "Target Format",
+      "start": "Convert & Download"
+    },
+    "idphoto": {
+      "uploadTitle": "Upload Photo",
+      "uploadDesc": "Click or drag to upload",
+      "bgTitle": "Select Background",
+      "download": "Save Image",
+      "preview": "Preview Area",
+      "colors": {
+        "white": "White",
+        "blue": "Blue",
+        "red": "Red",
+        "gray": "Gray"
+      }
+    },
+    "compress": {
+      "title": "Image Compression",
+      "upload": "Upload Image",
+      "quality": "Quality",
+      "start": "Start Compression",
+      "done": "Compression Done",
+      "download": "Download"
+    }
+  },
+  "aiTools": {
+    "title": "AI Hub",
+    "desc": "Curated top AI productivity tools to boost your efficiency.",
+    "categories": {
+      "ppt": "PPT / Presentation",
+      "writing": "Writing / Assistant",
+      "web": "Website / UI",
+      "art": "Art / Design"
+    },
+    "tools": {
+      "gamma": "Generate PPT, docs, and webpages with one click.",
+      "tome": "AI-powered storytelling format.",
+      "beautiful": "Smart presentation software.",
+      "chatgpt": "Most powerful AI assistant for writing and coding.",
+      "claude": "Great for long-form writing and analysis.",
+      "notion": "AI writing assistant inside your notes.",
+      "v0": "Generate React/Tailwind code with natural language.",
+      "framer": "Generate high-fidelity designs and publish sites.",
+      "dora": "Generate 3D animated websites.",
+      "midjourney": "Best-in-class AI art generation.",
+      "stable": "Powerful open-source image generation model.",
+      "canva": "AI design tools for everyone."
+    },
+    "tags": {
+      "recommend": "Recommended",
+      "must": "Must Have",
+      "dev": "Dev",
+      "paid": "Paid"
+    }
+  },
+  "unitConverter": {
+    "title": "Unit Converter",
+    "inputLabel": "Input Value",
+    "resultLabel": "Result",
+    "categories": {
+      "length": "Length",
+      "area": "Area",
+      "weight": "Weight",
+      "volume": "Volume",
+      "temperature": "Temperature",
+      "data": "Data Storage"
+    },
+    "units": {
+      "km": "Kilometer",
+      "m": "Meter",
+      "cm": "Centimeter",
+      "mm": "Millimeter",
+      "mi": "Mile",
+      "yd": "Yard",
+      "ft": "Foot",
+      "in": "Inch",
+      "km2": "Square Kilometer",
+      "m2": "Square Meter",
+      "cm2": "Square Centimeter",
+      "ha": "Hectare",
+      "mu": "Mu",
+      "mi2": "Square Mile",
+      "ac": "Acre",
+      "t": "Tonne",
+      "kg": "Kilogram",
+      "g": "Gram",
+      "mg": "Milligram",
+      "lb": "Pound",
+      "oz": "Ounce",
+      "m3": "Cubic Meter",
+      "l": "Liter",
+      "ml": "Milliliter",
+      "gal": "Gallon (US)",
+      "c": "Celsius",
+      "f": "Fahrenheit",
+      "k": "Kelvin",
+      "tb": "TB",
+      "gb": "GB",
+      "mb": "MB",
+      "kb": "KB",
+      "byte": "Byte"
+    },
+    "common": {
+      "title": "Common Conversions",
+      "dataTitle": "Data Storage",
+      "tempTitle": "Temperature"
+    }
+  },
+  "otherTools": {
+    "qr": {
+      "title": "QR Code Generator",
+      "placeholder": "Enter URL or text...",
+      "waiting": "Auto-generated after input",
+      "download": "Download QR Code"
+    },
+    "color": {
+      "title": "Color Converter",
+      "select": "Select Color",
+      "preview": "Preview"
+    }
+  },
+  "seo": {
+    "title": "TechRock Tools - Free Online Developer & Designer Toolbox",
+    "keywords": "developer tools, online tools, timestamp converter, json formatter, image compression, id photo background, unit converter, ai tools, techrock, free tools",
+    "description": "TechRock Tools (teckrock.top) provides free all-in-one online tools including timestamp conversion, JSON formatting, image processing, and AI tool navigation to boost your productivity."
+  }
+}

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '../layout/DefaultLayout.vue'
 import Home from '../views/Home.vue'
+import i18n from '../i18n'
 
 const routes = [
   {
@@ -40,8 +41,7 @@ const routes = [
       {
         path: 'other-tools',
         name: 'OtherTools',
-        component: () => import('../views/OtherTools.vue'),
-        meta: { title: '日常工具 - TechRock Tools' }
+        component: () => import('../views/OtherTools.vue')
       }
     ]
   }
@@ -52,21 +52,25 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
+  const t = i18n.global.t
   const title = to.meta.title as string
+  
   if (title) {
     document.title = title
   } else if (to.name) {
-    // Fallback for routes without explicit title
+    const appTitle = t('app.title')
     const nameMap: Record<string, string> = {
-      'Home': '仪表盘 - TechRock Tools',
-      'Timestamp': '时间戳工具 - TechRock Tools',
-      'DevTools': '开发工具箱 - TechRock Tools',
-      'ImageTools': '图片工具箱 - TechRock Tools',
-      'UnitConverter': '单位换算 - TechRock Tools',
-      'AiTools': 'AI 聚合站 - TechRock Tools',
+      'Home': t('nav.dashboard'),
+      'Timestamp': t('nav.timestamp'),
+      'DevTools': t('nav.devTools'),
+      'ImageTools': t('nav.imageTools'),
+      'UnitConverter': t('nav.unitConverter'),
+      'AiTools': t('nav.aiTools'),
+      'OtherTools': t('nav.otherTools'),
     }
-    document.title = nameMap[to.name as string] || 'TechRock Tools'
+    const pageTitle = nameMap[to.name as string]
+    document.title = pageTitle ? `${pageTitle} - ${appTitle}` : appTitle
   }
   next()
 })
