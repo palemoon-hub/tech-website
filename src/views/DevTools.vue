@@ -259,6 +259,33 @@
         </div>
       </div>
 
+      <!-- 8. QR Code -->
+      <div v-if="currentTool === 'qr'" class="h-full flex flex-col gap-6">
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <h3 class="font-medium text-gray-900 mb-4">{{ $t('otherTools.qr.title') }}</h3>
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="flex-1 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('otherTools.qr.placeholder') }}</label>
+                <textarea v-model="qrText" class="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none font-mono text-sm" :placeholder="$t('otherTools.qr.placeholder')"></textarea>
+              </div>
+            </div>
+            <div class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl border border-gray-100 min-w-[300px]">
+              <div v-if="qrDataUrl" class="text-center space-y-4">
+                <img :src="qrDataUrl" class="w-48 h-48 mx-auto border-4 border-white shadow-sm rounded-lg" />
+                <button @click="downloadQr" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center justify-center gap-2">
+                  <Download class="w-4 h-4" /> {{ $t('otherTools.qr.download') }}
+                </button>
+              </div>
+              <div v-else class="text-center text-gray-400">
+                <QrCode class="w-16 h-16 mx-auto mb-4 opacity-50" />
+                <p class="text-sm">{{ $t('otherTools.qr.waiting') }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     </main>
   </div>
@@ -269,7 +296,8 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CryptoJS from 'crypto-js'
 import * as Diff from 'diff'
-import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare, Terminal } from 'lucide-vue-next'
+import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare, Terminal, QrCode, Download } from 'lucide-vue-next'
+import QRCode from 'qrcode'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -285,6 +313,7 @@ const tools = computed(() => [
   { id: 'hash', name: t('devTools.nav.hash'), icon: Hash },
   { id: 'regex', name: t('devTools.nav.regex'), icon: Replace },
   { id: 'text', name: t('devTools.nav.text'), icon: Type },
+  { id: 'qr', name: t('devTools.nav.qr'), icon: QrCode },
   { id: 'generator', name: t('devTools.nav.generator'), icon: KeyRound },
 ])
 
@@ -384,6 +413,30 @@ const convertCase = (type: 'upper' | 'lower' | 'camel' | 'snake' | 'kebab') => {
       textInput.value = text.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '').replace(/\s+/g, '-')
       break
   }
+}
+
+// QR Code
+const qrText = ref('')
+const qrDataUrl = ref('')
+
+watch(qrText, async (newVal) => {
+  if (!newVal.trim()) {
+    qrDataUrl.value = ''
+    return
+  }
+  try {
+    qrDataUrl.value = await QRCode.toDataURL(newVal, { width: 400, margin: 2 })
+  } catch (err) {
+    console.error(err)
+  }
+}, { immediate: true })
+
+const downloadQr = () => {
+  if (!qrDataUrl.value) return
+  const link = document.createElement('a')
+  link.download = 'qrcode.png'
+  link.href = qrDataUrl.value
+  link.click()
 }
 
 // Generators

@@ -65,6 +65,10 @@
         "name": "数据生成器",
         "desc": "UUID 生成、强密码生成。"
       },
+      "qr": {
+        "name": "二维码生成",
+        "desc": "快速生成可自定义的二维码图片。"
+      },
       "imageTools": {
         "name": "图片工具箱",
         "desc": "格式转换、压缩、证件照换底、图片编辑 (旋转/滤镜)。"
@@ -84,6 +88,10 @@
       "imageCompress": {
         "name": "图片压缩",
         "desc": "无损压缩图片，减小文件体积。"
+      },
+      "color": {
+        "name": "颜色转换",
+        "desc": "HEX/RGB 格式互转，支持屏幕吸色。"
       },
       "idPhoto": {
         "name": "证件照制作",
@@ -134,7 +142,8 @@
       "url": "URL 编解码",
       "hash": "哈希/加密",
       "regex": "正则测试",
-      "diff": "文本对比"
+      "diff": "文本对比",
+      "qr": "二维码生成"
     },
     "diff": {
       "original": "原始文本",
@@ -184,7 +193,8 @@
       "editor": "图片编辑",
       "watermark": "图片水印",
       "idphoto": "证件照换底",
-      "compress": "图片压缩"
+      "compress": "图片压缩",
+      "color": "颜色转换"
     },
     "convert": {
       "title": "格式转换",
@@ -253,6 +263,13 @@
       "start": "开始压缩",
       "done": "压缩完成",
       "download": "下载"
+    },
+    "color": {
+      "title": "颜色转换",
+      "select": "选择颜色",
+      "preview": "颜色预览",
+      "pickScreen": "屏幕吸色",
+      "notSupported": "您的浏览器不支持吸色功能"
     }
   },
   "aiTools": {

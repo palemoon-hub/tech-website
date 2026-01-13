@@ -81,10 +81,10 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { 
-  Clock, Code2, Image, Scale, Bot, MoreHorizontal, 
+  Clock, Code2, Image, Scale, Bot, 
   Wrench, Search, SearchX, Terminal, Palette, Coffee,
   FileJson, Hash, Link, Replace, Type, KeyRound, 
-  FileType, Minimize2, Edit3, GitCompare, Stamp
+  FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode
 } from 'lucide-vue-next'
 
 const { t } = useI18n()
@@ -179,6 +179,16 @@ const categories = computed(() => [
         tags: ['UUID', 'Password', 'Random'],
         new: true
       },
+      { 
+        name: t('home.tools.qr.name'), 
+        description: t('home.tools.qr.desc'), 
+        path: '/dev-tools',
+        query: { tool: 'qr' },
+        icon: QrCode,
+        color: 'bg-gray-800',
+        tags: ['QR Code', 'Generator', 'Image'],
+        new: true
+      },
     ]
   },
   {
@@ -224,6 +234,16 @@ const categories = computed(() => [
         tags: ['Compress', 'Size', 'Reduce']
       },
       { 
+        name: t('home.tools.color.name'), 
+        description: t('home.tools.color.desc'), 
+        path: '/image-tools',
+        query: { tool: 'color' },
+        icon: Palette,
+        color: 'bg-indigo-600',
+        tags: ['Color', 'Convert', 'Picker'],
+        new: true
+      },
+      { 
         name: t('home.tools.idPhoto.name'), 
         description: t('home.tools.idPhoto.desc'), 
         path: '/image-tools',
@@ -253,14 +273,6 @@ const categories = computed(() => [
         icon: Scale,
         color: 'bg-orange-500',
         tags: ['Metric', 'Imperial', 'Data']
-      },
-      { 
-        name: t('home.tools.otherTools.name'), 
-        description: t('home.tools.otherTools.desc'), 
-        path: '/other-tools',
-        icon: MoreHorizontal,
-        color: 'bg-teal-500',
-        tags: ['QRCode', 'Color', 'Utility']
       },
     ]
   }

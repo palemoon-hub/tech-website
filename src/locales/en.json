@@ -65,6 +65,10 @@
         "name": "Data Generator",
         "desc": "Generate UUIDs and secure passwords."
       },
+      "qr": {
+        "name": "QR Code Generator",
+        "desc": "Generate customizable QR codes quickly."
+      },
       "imageTools": {
         "name": "Image Toolbox",
         "desc": "Format convert, compress, ID photo background, image editor (filters/rotate)."
@@ -84,6 +88,10 @@
       "imageCompress": {
         "name": "Image Compress",
         "desc": "Compress images to reduce file size."
+      },
+      "color": {
+        "name": "Color Converter",
+        "desc": "Convert between HEX/RGB, supports screen color picking."
       },
       "idPhoto": {
         "name": "ID Photo Maker",
@@ -135,6 +143,7 @@
       "hash": "Hash/Crypto",
       "regex": "Regex Tester",
       "diff": "Text Diff",
+      "qr": "QR Code",
       "text": "Text Utilities",
       "generator": "Generators"
     },
@@ -207,7 +216,8 @@
       "editor": "Image Editor",
       "watermark": "Watermark",
       "idphoto": "ID Photo",
-      "compress": "Compress"
+      "compress": "Compress",
+      "color": "Color Converter"
     },
     "convert": {
       "title": "Image Format Converter",
@@ -278,6 +288,13 @@
       "start": "Start Compression",
       "done": "Compression Done",
       "download": "Download"
+    },
+    "color": {
+      "title": "Color Converter",
+      "select": "Select Color",
+      "preview": "Color Preview",
+      "pickScreen": "Pick Screen Color",
+      "notSupported": "Your browser does not support EyeDropper API"
     }
   },
   "aiTools": {
