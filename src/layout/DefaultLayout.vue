@@ -5,7 +5,7 @@
       <div class="p-6 border-b border-gray-100">
         <h1 class="text-xl font-bold text-gray-800 flex items-center gap-2">
           <Wrench class="w-6 h-6 text-blue-600" />
-          DevTools Pro
+          Teckrock Tools
         </h1>
       </div>
       
