@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://teckrock.top/sitemap.xml
