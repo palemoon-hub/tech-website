@@ -22,10 +22,21 @@
         </router-link>
       </nav>
 
-      <div class="p-4 border-t border-gray-100 text-xs text-center text-gray-400">
-        v1.1.0
+      <div class="p-4 border-t border-gray-100 space-y-4">
+        <button 
+          @click="isSupportOpen = true"
+          class="w-full flex items-center justify-center gap-2 py-2 px-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg shadow-md hover:shadow-lg hover:scale-[1.02] transition-all text-sm font-medium"
+        >
+          <Heart class="w-4 h-4 fill-current" />
+          {{ $t('support.title') }}
+        </button>
+        <div class="text-xs text-center text-gray-400">
+          v1.1.0
+        </div>
       </div>
     </aside>
+
+    <SupportModal :is-open="isSupportOpen" @close="isSupportOpen = false" />
 
     <!-- Main Content -->
     <main class="flex-1 overflow-hidden flex flex-col">
@@ -49,9 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import SupportModal from '../components/SupportModal.vue'
 import { 
   LayoutDashboard, 
   Clock, 
@@ -61,11 +73,13 @@ import {
   Bot, 
   MoreHorizontal,
   Wrench,
-  Globe
+  Globe,
+  Heart
 } from 'lucide-vue-next'
 
 const route = useRoute()
 const { t, locale } = useI18n()
+const isSupportOpen = ref(false)
 
 const toggleLanguage = () => {
   locale.value = locale.value === 'en' ? 'zh' : 'en'

@@ -51,6 +51,16 @@
       }
     }
   },
+  "support": {
+    "title": "Support & Custom Service",
+    "donate": "Donate USDT (ERC20/BEP20)",
+    "donateDesc": "Support our development with USDT (ERC20/BEP20)",
+    "copy": "Copy Address",
+    "copied": "Copied!",
+    "customDev": "Custom Software Development",
+    "contact": "Contact Us",
+    "emailDesc": "Need a custom solution? Contact us at:"
+  },
   "timestamp": {
     "current": "Current Time",
     "pause": "Pause",
@@ -224,14 +234,16 @@
   "otherTools": {
     "qr": {
       "title": "QR Code Generator",
-      "placeholder": "Enter URL or text...",
-      "waiting": "Auto-generated after input",
+      "placeholder": "Enter text or URL to generate QR code...",
+      "waiting": "QR code will appear here",
       "download": "Download QR Code"
     },
     "color": {
       "title": "Color Converter",
       "select": "Select Color",
-      "preview": "Preview"
+      "preview": "Color Preview",
+      "pickScreen": "Pick Screen Color",
+      "notSupported": "Your browser does not support EyeDropper API"
     }
   },
   "seo": {

@@ -71,6 +71,18 @@
             :style="{ backgroundColor: colorHex }"
           ></div>
         </div>
+
+        <!-- Screen Color Picker -->
+        <div class="pt-4 border-t border-gray-100">
+          <button 
+            @click="pickColor" 
+            class="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors font-medium"
+          >
+            <Pipette class="w-4 h-4" />
+            {{ $t('otherTools.color.pickScreen') }}
+          </button>
+          <p v-if="pickerError" class="text-xs text-red-500 mt-2 text-center">{{ pickerError }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +94,7 @@ import QRCode from 'qrcode'
 import { QrCode, Palette } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
-useI18n()
+const { t } = useI18n()
 
 // QR Code Logic
 const qrText = ref('')
@@ -98,7 +110,7 @@ watch(qrText, async (newVal) => {
   } catch (err) {
     console.error(err)
   }
-})
+}, { immediate: true })
 
 const downloadQr = () => {
   if (!qrDataUrl.value) return
@@ -110,6 +122,7 @@ const downloadQr = () => {
 
 // Color Logic
 const colorHex = ref('#3b82f6')
+const pickerError = ref('')
 
 const colorRgb = computed(() => {
   const hex = colorHex.value.replace('#', '')
@@ -119,4 +132,21 @@ const colorRgb = computed(() => {
   const b = parseInt(hex.substring(4, 6), 16)
   return `rgb(${r}, ${g}, ${b})`
 })
+
+const pickColor = async () => {
+  if (!('EyeDropper' in window)) {
+    pickerError.value = t('otherTools.color.notSupported')
+    return
+  }
+
+  try {
+    const eyeDropper = new (window as any).EyeDropper()
+    const result = await eyeDropper.open()
+    colorHex.value = result.sRGBHex
+    pickerError.value = ''
+  } catch (e) {
+    // User cancelled or error
+    console.log(e)
+  }
+}
 </script>

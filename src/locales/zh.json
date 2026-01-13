@@ -51,6 +51,16 @@
       }
     }
   },
+  "support": {
+    "title": "支持与定制",
+    "donate": "USDT 打赏 (ERC20/BEP20)",
+    "donateDesc": "您的支持是我们更新的动力",
+    "copy": "复制地址",
+    "copied": "已复制",
+    "customDev": "软件定制开发",
+    "contact": "联系我们",
+    "emailDesc": "需要定制开发服务？请联系："
+  },
   "timestamp": {
     "current": "当前时间",
     "pause": "暂停",
@@ -224,14 +234,16 @@
   "otherTools": {
     "qr": {
       "title": "二维码生成",
-      "placeholder": "输入网址或文本...",
-      "waiting": "输入文本后自动生成",
+      "placeholder": "输入文本或网址生成二维码...",
+      "waiting": "二维码将显示在这里",
       "download": "下载二维码"
     },
     "color": {
       "title": "颜色转换",
       "select": "选择颜色",
-      "preview": "预览"
+      "preview": "颜色预览",
+      "pickScreen": "屏幕吸色",
+      "notSupported": "您的浏览器不支持吸色功能"
     }
   },
   "seo": {
