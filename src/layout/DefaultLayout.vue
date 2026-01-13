@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useSearch } from '../composables/useSearch'
@@ -130,7 +130,6 @@ const route = useRoute()
 const router = useRouter()
 const { t, locale } = useI18n()
 const { searchQuery } = useSearch()
-const isSupportOpen = ref(false)
 
 const toggleLanguage = () => {
   locale.value = locale.value === 'en' ? 'zh' : 'en'
