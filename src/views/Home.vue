@@ -18,26 +18,32 @@
 </template>
 
 <script setup lang="ts">
-import { Clock, FileJson, Image, Bot, MoreHorizontal } from 'lucide-vue-next'
+import { Clock, Code2, Image, Scale, Bot, MoreHorizontal } from 'lucide-vue-next'
 
 const tools = [
   { 
-    name: '时间戳转换', 
-    description: 'Unix 时间戳与日期时间相互转换，支持多种格式。', 
+    name: '时间戳工具', 
+    description: 'Unix 时间戳与日期时间相互转换。', 
     path: '/timestamp',
     icon: Clock
   },
   { 
-    name: 'JSON/文本格式化', 
-    description: 'JSON 美化、压缩、校验，以及普通文本处理。', 
-    path: '/json-format',
-    icon: FileJson
+    name: '开发工具箱', 
+    description: 'JSON、Base64、URL 编解码、正则测试、哈希计算。', 
+    path: '/dev-tools',
+    icon: Code2
   },
   { 
-    name: '证件照换底', 
-    description: '快速更换证件照背景颜色，支持红/蓝/白底。', 
-    path: '/id-photo',
+    name: '图片工具箱', 
+    description: '格式转换、图片压缩、证件照换底。', 
+    path: '/image-tools',
     icon: Image
+  },
+  { 
+    name: '单位换算', 
+    description: '长度、面积、重量、体积、温度、数据存储换算。', 
+    path: '/unit-converter',
+    icon: Scale
   },
   { 
     name: 'AI 聚合站', 
@@ -46,8 +52,8 @@ const tools = [
     icon: Bot
   },
   { 
-    name: '其他常用工具', 
-    description: '二维码生成、单位换算、颜色提取等日常小工具。', 
+    name: '日常工具', 
+    description: '二维码生成、颜色转换等日常小工具。', 
     path: '/other-tools',
     icon: MoreHorizontal
   },

@@ -23,7 +23,7 @@
       </nav>
 
       <div class="p-4 border-t border-gray-100 text-xs text-center text-gray-400">
-        v1.0.0
+        v1.1.0
       </div>
     </aside>
 
@@ -51,8 +51,9 @@ import { useRoute } from 'vue-router'
 import { 
   LayoutDashboard, 
   Clock, 
-  FileJson, 
+  Code2, 
   Image, 
+  Scale,
   Bot, 
   MoreHorizontal,
   Wrench
@@ -67,11 +68,12 @@ const currentRouteName = computed(() => {
 
 const navItems = [
   { name: '仪表盘', path: '/', icon: LayoutDashboard },
-  { name: '时间戳转换', path: '/timestamp', icon: Clock },
-  { name: '格式化工具', path: '/json-format', icon: FileJson },
-  { name: '证件照换底', path: '/id-photo', icon: Image },
+  { name: '时间戳工具', path: '/timestamp', icon: Clock },
+  { name: '开发工具箱', path: '/dev-tools', icon: Code2 },
+  { name: '图片工具箱', path: '/image-tools', icon: Image },
+  { name: '单位换算', path: '/unit-converter', icon: Scale },
   { name: 'AI 聚合站', path: '/ai-tools', icon: Bot },
-  { name: '常用工具', path: '/other-tools', icon: MoreHorizontal },
+  { name: '日常工具', path: '/other-tools', icon: MoreHorizontal },
 ]
 </script>
 

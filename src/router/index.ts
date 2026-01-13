@@ -18,14 +18,19 @@ const routes = [
         component: () => import('../views/Timestamp.vue')
       },
       {
-        path: 'json-format',
-        name: 'JsonFormat',
-        component: () => import('../views/JsonFormat.vue')
+        path: 'dev-tools',
+        name: 'DevTools',
+        component: () => import('../views/DevTools.vue')
       },
       {
-        path: 'id-photo',
-        name: 'IdPhoto',
-        component: () => import('../views/IdPhoto.vue')
+        path: 'image-tools',
+        name: 'ImageTools',
+        component: () => import('../views/ImageTools.vue')
+      },
+      {
+        path: 'unit-converter',
+        name: 'UnitConverter',
+        component: () => import('../views/UnitConverter.vue')
       },
       {
         path: 'ai-tools',
