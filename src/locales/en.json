@@ -33,9 +33,61 @@
         "name": "Dev Toolbox",
         "desc": "JSON format, Base64, URL encode/decode, Regex test."
       },
+      "json": {
+        "name": "JSON Tools",
+        "desc": "Format, validate, and minify JSON data."
+      },
+      "base64": {
+        "name": "Base64 Tool",
+        "desc": "Encode and decode Base64 strings."
+      },
+      "url": {
+        "name": "URL Encoder",
+        "desc": "URL encode and decode tool."
+      },
+      "hash": {
+        "name": "Hash Generator",
+        "desc": "MD5, SHA1, SHA256, SHA512 generator."
+      },
+      "regex": {
+        "name": "Regex Tester",
+        "desc": "Test and debug regular expressions."
+      },
+      "diff": {
+        "name": "Text Diff",
+        "desc": "Compare two texts and highlight differences."
+      },
+      "text": {
+        "name": "Text Utils",
+        "desc": "Word count, character count, case converter."
+      },
+      "generator": {
+        "name": "Data Generator",
+        "desc": "Generate UUIDs and secure passwords."
+      },
       "imageTools": {
         "name": "Image Toolbox",
-        "desc": "Format convert (JPG/PNG/WebP), compress, ID photo background."
+        "desc": "Format convert, compress, ID photo background, image editor (filters/rotate)."
+      },
+      "imageEditor": {
+        "name": "Image Editor",
+        "desc": "Rotate, flip, adjust brightness/contrast, and filters."
+      },
+      "watermark": {
+        "name": "Watermark Tool",
+        "desc": "Add custom text watermarks to your images."
+      },
+      "imageConvert": {
+        "name": "Image Converter",
+        "desc": "Convert images to PNG, JPG, WEBP formats."
+      },
+      "imageCompress": {
+        "name": "Image Compress",
+        "desc": "Compress images to reduce file size."
+      },
+      "idPhoto": {
+        "name": "ID Photo Maker",
+        "desc": "Create professional ID photos with custom backgrounds."
       },
       "aiTools": {
         "name": "AI Hub",
@@ -81,13 +133,49 @@
       "base64": "Base64",
       "url": "URL Encode/Decode",
       "hash": "Hash/Crypto",
-      "regex": "Regex Tester"
+      "regex": "Regex Tester",
+      "diff": "Text Diff",
+      "text": "Text Utilities",
+      "generator": "Generators"
+    },
+    "diff": {
+      "original": "Original Text",
+      "originalPlaceholder": "Paste original text here...",
+      "modified": "Modified Text",
+      "modifiedPlaceholder": "Paste modified text here...",
+      "result": "Diff Result"
     },
     "json": {
       "input": "Input JSON",
       "format": "Format",
       "minify": "Minify",
       "result": "Result"
+    },
+    "text": {
+      "input": "Input Text",
+      "stats": "Statistics",
+      "chars": "Characters",
+      "words": "Words",
+      "lines": "Lines",
+      "convert": "Convert Case",
+      "upper": "UPPERCASE",
+      "lower": "lowercase",
+      "camel": "camelCase",
+      "snake": "snake_case",
+      "kebab": "kebab-case",
+      "clear": "Clear"
+    },
+    "generator": {
+      "uuid": "UUID Generator",
+      "password": "Password Generator",
+      "generate": "Generate",
+      "length": "Length",
+      "options": "Options",
+      "uppercase": "Uppercase (A-Z)",
+      "lowercase": "Lowercase (a-z)",
+      "numbers": "Numbers (0-9)",
+      "symbols": "Symbols (!@#$)",
+      "copy": "Copy"
     },
     "base64": {
       "encode": "Encode",
@@ -116,15 +204,59 @@
   "imageTools": {
     "nav": {
       "convert": "Format Convert",
+      "editor": "Image Editor",
+      "watermark": "Watermark",
       "idphoto": "ID Photo",
       "compress": "Compress"
     },
     "convert": {
-      "title": "Format Converter",
-      "upload": "Click to upload image (JPG/PNG/WEBP/GIF)",
+      "title": "Image Format Converter",
+      "upload": "Click to upload image",
       "selected": "Selected: {name}",
       "target": "Target Format",
-      "start": "Convert & Download"
+      "start": "Start Conversion",
+      "success": "Conversion Successful!",
+      "download": "Download Image"
+    },
+    "editor": {
+      "title": "Image Editor",
+      "upload": "Upload Image to Edit",
+      "rotateLeft": "Rotate Left",
+      "rotateRight": "Rotate Right",
+      "flipH": "Flip H",
+      "flipV": "Flip V",
+      "transform": "Transform",
+      "adjust": "Adjust",
+      "filters": "Filters",
+      "grayscale": "Grayscale",
+      "invert": "Invert",
+      "brightness": "Brightness",
+      "contrast": "Contrast",
+      "reset": "Reset",
+      "download": "Download Edited"
+    },
+    "watermark": {
+      "title": "Image Watermark",
+      "upload": "Upload Image",
+      "download": "Download Image",
+      "settings": "Watermark Settings",
+      "text": "Text",
+      "size": "Size",
+      "color": "Color",
+      "opacity": "Opacity",
+      "position": "Position",
+      "pos": {
+        "tile": "Tile (Repeat)",
+        "tl": "Top Left",
+        "tm": "Top Middle",
+        "tr": "Top Right",
+        "ml": "Middle Left",
+        "center": "Center",
+        "mr": "Middle Right",
+        "bl": "Bottom Left",
+        "bm": "Bottom Middle",
+        "br": "Bottom Right"
+      }
     },
     "idphoto": {
       "uploadTitle": "Upload Photo",

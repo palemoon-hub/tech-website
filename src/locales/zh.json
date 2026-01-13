@@ -33,9 +33,61 @@
         "name": "开发工具箱",
         "desc": "JSON 格式化、Base64、URL 编解码、正则测试。"
       },
+      "json": {
+        "name": "JSON 工具",
+        "desc": "在线格式化、校验、压缩 JSON 数据。"
+      },
+      "base64": {
+        "name": "Base64 工具",
+        "desc": "Base64 在线编码和解码。"
+      },
+      "url": {
+        "name": "URL 编解码",
+        "desc": "URL 编码和解码工具。"
+      },
+      "hash": {
+        "name": "哈希生成器",
+        "desc": "MD5, SHA1, SHA256, SHA512 哈希生成。"
+      },
+      "regex": {
+        "name": "正则测试",
+        "desc": "在线正则表达式测试与调试。"
+      },
+      "diff": {
+        "name": "文本对比",
+        "desc": "在线对比两段文本的差异，高亮显示不同之处。"
+      },
+      "text": {
+        "name": "文本工具",
+        "desc": "字数统计、大小写转换、行数统计。"
+      },
+      "generator": {
+        "name": "数据生成器",
+        "desc": "UUID 生成、强密码生成。"
+      },
       "imageTools": {
         "name": "图片工具箱",
-        "desc": "格式转换 (JPG/PNG/WebP)、压缩、证件照换底。"
+        "desc": "格式转换、压缩、证件照换底、图片编辑 (旋转/滤镜)。"
+      },
+      "imageEditor": {
+        "name": "图片编辑器",
+        "desc": "在线旋转、翻转、调节亮度/对比度、滤镜。"
+      },
+      "watermark": {
+        "name": "图片水印",
+        "desc": "为图片添加自定义文字水印，保护版权。"
+      },
+      "imageConvert": {
+        "name": "格式转换",
+        "desc": "支持 PNG, JPG, WEBP 格式互转。"
+      },
+      "imageCompress": {
+        "name": "图片压缩",
+        "desc": "无损压缩图片，减小文件体积。"
+      },
+      "idPhoto": {
+        "name": "证件照制作",
+        "desc": "智能更换证件照背景颜色。"
       },
       "aiTools": {
         "name": "AI 聚合站",
@@ -81,7 +133,15 @@
       "base64": "Base64",
       "url": "URL 编解码",
       "hash": "哈希/加密",
-      "regex": "正则测试"
+      "regex": "正则测试",
+      "diff": "文本对比"
+    },
+    "diff": {
+      "original": "原始文本",
+      "originalPlaceholder": "在此粘贴原始文本...",
+      "modified": "修改后文本",
+      "modifiedPlaceholder": "在此粘贴修改后文本...",
+      "result": "对比结果"
     },
     "json": {
       "input": "输入 JSON",
@@ -111,11 +171,18 @@
       "text": "测试文本",
       "result": "匹配结果",
       "noMatch": "无匹配"
+    },
+    "text": {
+      "snake": "下划线 (snake_case)",
+      "kebab": "中划线 (kebab-case)",
+      "clear": "清空"
     }
   },
   "imageTools": {
     "nav": {
       "convert": "格式转换",
+      "editor": "图片编辑",
+      "watermark": "图片水印",
       "idphoto": "证件照换底",
       "compress": "图片压缩"
     },
@@ -125,6 +192,46 @@
       "selected": "已选择: {name}",
       "target": "目标格式",
       "start": "开始转换并下载"
+    },
+    "editor": {
+      "title": "图片编辑器",
+      "upload": "上传图片进行编辑",
+      "rotateLeft": "向左旋转",
+      "rotateRight": "向右旋转",
+      "flipH": "水平翻转",
+      "flipV": "垂直翻转",
+      "transform": "变换",
+      "adjust": "调节",
+      "filters": "滤镜效果",
+      "grayscale": "黑白",
+      "invert": "反色",
+      "brightness": "亮度",
+      "contrast": "对比度",
+      "reset": "重置所有",
+      "download": "下载编辑后的图片"
+    },
+    "watermark": {
+      "title": "图片水印",
+      "upload": "上传图片",
+      "download": "下载图片",
+      "settings": "水印设置",
+      "text": "水印文字",
+      "size": "大小",
+      "color": "颜色",
+      "opacity": "透明度",
+      "position": "位置",
+      "pos": {
+        "tile": "平铺",
+        "tl": "左上",
+        "tm": "中上",
+        "tr": "右上",
+        "ml": "左中",
+        "center": "居中",
+        "mr": "右中",
+        "bl": "左下",
+        "bm": "中下",
+        "br": "右下"
+      }
     },
     "idphoto": {
       "uploadTitle": "上传照片",

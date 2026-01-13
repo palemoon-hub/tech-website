@@ -120,32 +120,166 @@
         </div>
       </div>
 
+      <!-- 6. Text Utilities -->
+      <div v-if="currentTool === 'text'" class="h-full flex flex-col gap-6">
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col h-full">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-medium text-gray-900">{{ $t('devTools.text.input') }}</h3>
+            <div class="flex gap-2">
+               <button @click="textInput = ''" class="text-xs text-gray-500 hover:text-gray-700">{{ $t('devTools.text.clear') }}</button>
+            </div>
+          </div>
+          <textarea v-model="textInput" class="flex-1 w-full p-4 border border-gray-300 rounded-lg resize-none font-mono text-sm mb-4" :placeholder="$t('devTools.text.input')"></textarea>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 text-center">
+              <div class="text-2xl font-bold text-blue-600">{{ textStats.chars }}</div>
+              <div class="text-xs text-blue-600 uppercase tracking-wider">{{ $t('devTools.text.chars') }}</div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-100 text-center">
+              <div class="text-2xl font-bold text-green-600">{{ textStats.words }}</div>
+              <div class="text-xs text-green-600 uppercase tracking-wider">{{ $t('devTools.text.words') }}</div>
+            </div>
+            <div class="bg-purple-50 p-4 rounded-lg border border-purple-100 text-center">
+              <div class="text-2xl font-bold text-purple-600">{{ textStats.lines }}</div>
+              <div class="text-xs text-purple-600 uppercase tracking-wider">{{ $t('devTools.text.lines') }}</div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4">
+            <label class="block text-sm font-medium text-gray-700 mb-3">{{ $t('devTools.text.convert') }}</label>
+            <div class="flex flex-wrap gap-2">
+              <button @click="convertCase('upper')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm transition-colors">{{ $t('devTools.text.upper') }}</button>
+              <button @click="convertCase('lower')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm transition-colors">{{ $t('devTools.text.lower') }}</button>
+              <button @click="convertCase('camel')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm transition-colors">{{ $t('devTools.text.camel') }}</button>
+              <button @click="convertCase('snake')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm transition-colors">{{ $t('devTools.text.snake') }}</button>
+              <button @click="convertCase('kebab')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm transition-colors">{{ $t('devTools.text.kebab') }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Generators -->
+      <div v-if="currentTool === 'generator'" class="h-full flex flex-col gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- UUID -->
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
+              <Hash class="w-4 h-4 text-blue-500" /> {{ $t('devTools.generator.uuid') }}
+            </h3>
+            <div class="flex gap-2 mb-4">
+              <input type="text" readonly :value="uuidResult" class="flex-1 p-2 bg-gray-50 border border-gray-200 rounded text-sm font-mono text-gray-600" placeholder="UUID v4">
+              <button @click="copyUuid" class="px-3 py-2 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">
+                <Link class="w-4 h-4" />
+              </button>
+            </div>
+            <button @click="genUuid" class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+              {{ $t('devTools.generator.generate') }}
+            </button>
+          </div>
+
+          <!-- Password -->
+          <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+            <h3 class="font-medium text-gray-900 mb-4 flex items-center gap-2">
+              <KeyRound class="w-4 h-4 text-green-500" /> {{ $t('devTools.generator.password') }}
+            </h3>
+            
+            <div class="mb-4 space-y-3">
+              <div>
+                <div class="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{{ $t('devTools.generator.length') }}</span>
+                  <span>{{ pwdLength }}</span>
+                </div>
+                <input type="range" v-model.number="pwdLength" min="6" max="64" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+              </div>
+              
+              <div class="grid grid-cols-2 gap-2">
+                <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <input type="checkbox" v-model="pwdOptions.upper" class="rounded text-green-600 focus:ring-green-500"> {{ $t('devTools.generator.uppercase') }}
+                </label>
+                <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <input type="checkbox" v-model="pwdOptions.lower" class="rounded text-green-600 focus:ring-green-500"> {{ $t('devTools.generator.lowercase') }}
+                </label>
+                <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <input type="checkbox" v-model="pwdOptions.number" class="rounded text-green-600 focus:ring-green-500"> {{ $t('devTools.generator.numbers') }}
+                </label>
+                <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <input type="checkbox" v-model="pwdOptions.symbol" class="rounded text-green-600 focus:ring-green-500"> {{ $t('devTools.generator.symbols') }}
+                </label>
+              </div>
+            </div>
+
+            <div class="flex gap-2 mb-4">
+              <input type="text" readonly :value="pwdResult" class="flex-1 p-2 bg-gray-50 border border-gray-200 rounded text-sm font-mono text-gray-600" placeholder="...">
+              <button @click="copyPwd" class="px-3 py-2 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-colors">
+                <Link class="w-4 h-4" />
+              </button>
+            </div>
+            
+            <button @click="genPassword" class="w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+              {{ $t('devTools.generator.generate') }}
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import CryptoJS from 'crypto-js'
-import { FileJson, Hash, Link, Code2, Replace } from 'lucide-vue-next'
+import * as Diff from 'diff'
+import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 const currentTool = ref('json')
 
 const tools = computed(() => [
   { id: 'json', name: t('devTools.nav.json'), icon: FileJson },
+  { id: 'diff', name: t('devTools.nav.diff'), icon: GitCompare },
   { id: 'base64', name: t('devTools.nav.base64'), icon: Code2 },
   { id: 'url', name: t('devTools.nav.url'), icon: Link },
   { id: 'hash', name: t('devTools.nav.hash'), icon: Hash },
   { id: 'regex', name: t('devTools.nav.regex'), icon: Replace },
+  { id: 'text', name: t('devTools.nav.text'), icon: Type },
+  { id: 'generator', name: t('devTools.nav.generator'), icon: KeyRound },
 ])
+
+onMounted(() => {
+  if (route.query.tool && tools.value.some(t => t.id === route.query.tool)) {
+    currentTool.value = route.query.tool as string
+  }
+})
+
+watch(currentTool, (newTool) => {
+  router.replace({ query: { ...route.query, tool: newTool } })
+})
+
+watch(() => route.query.tool, (newTool) => {
+  if (newTool && tools.value.some(t => t.id === newTool)) {
+    currentTool.value = newTool as string
+  }
+})
 
 // JSON
 const jsonInput = ref('')
 const jsonOutput = ref('')
 const jsonFormat = () => { try { jsonOutput.value = JSON.stringify(JSON.parse(jsonInput.value), null, 2) } catch(e:any) { jsonOutput.value = e.message } }
 const jsonMinify = () => { try { jsonOutput.value = JSON.stringify(JSON.parse(jsonInput.value)) } catch(e:any) { jsonOutput.value = e.message } }
+
+// Diff
+const diffOld = ref('')
+const diffNew = ref('')
+const diffResult = computed(() => {
+  if (!diffOld.value && !diffNew.value) return []
+  return Diff.diffLines(diffOld.value, diffNew.value)
+})
 
 // Base64
 const b64Input = ref('')
@@ -182,4 +316,80 @@ const regexMatches = computed(() => {
     return []
   }
 })
+
+// Text Utilities
+const textInput = ref('')
+const textStats = computed(() => {
+  const text = textInput.value
+  return {
+    chars: text.length,
+    words: text.trim() ? text.trim().split(/\s+/).length : 0,
+    lines: text ? text.split(/\r\n|\r|\n/).length : 0
+  }
+})
+
+const convertCase = (type: 'upper' | 'lower' | 'camel' | 'snake' | 'kebab') => {
+  const text = textInput.value
+  switch (type) {
+    case 'upper':
+      textInput.value = text.toUpperCase()
+      break
+    case 'lower':
+      textInput.value = text.toLowerCase()
+      break
+    case 'camel':
+      textInput.value = text.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
+      break
+    case 'snake':
+      textInput.value = text.replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '').replace(/\s+/g, '_')
+      break
+    case 'kebab':
+      textInput.value = text.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '').replace(/\s+/g, '-')
+      break
+  }
+}
+
+// Generators
+const uuidResult = ref('')
+const genUuid = () => {
+  uuidResult.value = crypto.randomUUID()
+}
+const copyUuid = () => {
+  navigator.clipboard.writeText(uuidResult.value)
+}
+
+const pwdLength = ref(16)
+const pwdOptions = ref({
+  upper: true,
+  lower: true,
+  number: true,
+  symbol: true
+})
+const pwdResult = ref('')
+const genPassword = () => {
+  const chars = {
+    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lower: 'abcdefghijklmnopqrstuvwxyz',
+    number: '0123456789',
+    symbol: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+  }
+  let charset = ''
+  if (pwdOptions.value.upper) charset += chars.upper
+  if (pwdOptions.value.lower) charset += chars.lower
+  if (pwdOptions.value.number) charset += chars.number
+  if (pwdOptions.value.symbol) charset += chars.symbol
+  
+  if (!charset) return
+  
+  let pwd = ''
+  const array = new Uint32Array(pwdLength.value)
+  crypto.getRandomValues(array)
+  for (let i = 0; i < pwdLength.value; i++) {
+    pwd += charset[array[i] % charset.length]!
+  }
+  pwdResult.value = pwd
+}
+const copyPwd = () => {
+  navigator.clipboard.writeText(pwdResult.value)
+}
 </script>
