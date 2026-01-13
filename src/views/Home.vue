@@ -8,22 +8,9 @@
       
       <div class="relative z-10 max-w-2xl">
         <h1 class="text-3xl md:text-5xl font-bold mb-4">{{ $t('home.heroTitle') }}</h1>
-        <p class="text-blue-100 text-lg mb-8 leading-relaxed">
+        <p class="text-blue-100 text-lg leading-relaxed">
           {{ $t('home.heroDesc') }}
         </p>
-        
-        <!-- Search Bar -->
-        <div class="relative max-w-lg group">
-          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search class="h-5 w-5 text-gray-400 group-focus-within:text-blue-600 transition-colors" />
-          </div>
-          <input 
-            v-model="searchQuery"
-            type="text" 
-            class="block w-full pl-11 pr-4 py-4 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/30 shadow-lg" 
-            :placeholder="$t('home.searchPlaceholder')" 
-          />
-        </div>
       </div>
     </div>
 
@@ -78,17 +65,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useSearch } from '../composables/useSearch'
 import { 
   Clock, Code2, Image, Scale, Bot, 
-  Wrench, Search, SearchX, Terminal, Palette, Coffee,
+  Wrench, SearchX, Terminal, Palette, Coffee,
   FileJson, Hash, Link, Replace, Type, KeyRound, 
   FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode
 } from 'lucide-vue-next'
 
 const { t } = useI18n()
-const searchQuery = ref('')
+const { searchQuery } = useSearch()
 
 // Tool Data with Categories
 const categories = computed(() => [
