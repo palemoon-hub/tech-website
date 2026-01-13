@@ -1,21 +1,30 @@
 <template>
-  <div class="h-[calc(100vh-8rem)] flex flex-col gap-6">
-    <!-- Tools Navigation -->
-    <div class="flex gap-2 border-b border-gray-200 pb-2 overflow-x-auto">
-      <button 
-        v-for="tool in tools" 
-        :key="tool.id"
-        @click="currentTool = tool.id"
-        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2"
-        :class="currentTool === tool.id ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'"
-      >
-        <component :is="tool.icon" class="w-4 h-4" />
-        {{ tool.name }}
-      </button>
-    </div>
+  <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-8rem)]">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full lg:w-64 flex-shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+      <div class="p-4 border-b border-gray-100 bg-gray-50/50">
+        <h2 class="font-semibold text-gray-900 flex items-center gap-2">
+          <Terminal class="w-4 h-4 text-blue-600" />
+          {{ $t('home.categories.dev') }}
+        </h2>
+      </div>
+      <div class="flex-1 overflow-y-auto p-2 space-y-1">
+        <button 
+          v-for="tool in tools" 
+          :key="tool.id"
+          @click="currentTool = tool.id"
+          class="w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-3 text-left group"
+          :class="currentTool === tool.id ? 'bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-200' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+        >
+          <component :is="tool.icon" class="w-4 h-4" :class="currentTool === tool.id ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'" />
+          {{ tool.name }}
+        </button>
+      </div>
+    </aside>
 
     <!-- Content Area -->
-    <div class="flex-1 min-h-0 overflow-auto">
+    <main class="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col min-w-0">
+      <div class="p-6 h-full overflow-auto">
       
       <!-- 1. JSON (Existing) -->
       <div v-if="currentTool === 'json'" class="h-full flex gap-4">
@@ -36,7 +45,34 @@
         </div>
       </div>
 
-      <!-- 2. Base64 -->
+      <!-- 2. Diff -->
+      <div v-if="currentTool === 'diff'" class="h-full flex flex-col gap-4">
+        <div class="grid grid-cols-2 gap-4 flex-1 min-h-0">
+          <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium text-gray-700">{{ $t('devTools.diff.original') }}</label>
+            <textarea v-model="diffOld" class="flex-1 p-4 border border-gray-300 rounded-lg resize-none font-mono text-sm whitespace-pre" :placeholder="$t('devTools.diff.originalPlaceholder')"></textarea>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium text-gray-700">{{ $t('devTools.diff.modified') }}</label>
+            <textarea v-model="diffNew" class="flex-1 p-4 border border-gray-300 rounded-lg resize-none font-mono text-sm whitespace-pre" :placeholder="$t('devTools.diff.modifiedPlaceholder')"></textarea>
+          </div>
+        </div>
+        <div class="h-1/3 bg-white border border-gray-200 rounded-lg overflow-auto p-4 font-mono text-sm">
+          <div v-if="diffResult.length === 0" class="text-gray-400 text-center mt-4">{{ $t('devTools.diff.noChanges') }}</div>
+          <div v-for="(part, index) in diffResult" :key="index"
+            :class="{
+              'bg-green-100 text-green-800': part.added,
+              'bg-red-100 text-red-800': part.removed,
+              'text-gray-600': !part.added && !part.removed
+            }"
+            class="whitespace-pre-wrap break-all"
+          >
+            {{ part.value }}
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Base64 -->
       <div v-if="currentTool === 'base64'" class="h-full flex flex-col gap-4">
         <div class="flex gap-2">
           <button @click="b64Encode" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">{{ $t('devTools.base64.encode') }}</button>
@@ -224,6 +260,7 @@
       </div>
 
     </div>
+    </main>
   </div>
 </template>
 
@@ -232,7 +269,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CryptoJS from 'crypto-js'
 import * as Diff from 'diff'
-import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare } from 'lucide-vue-next'
+import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare, Terminal } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -385,7 +422,11 @@ const genPassword = () => {
   const array = new Uint32Array(pwdLength.value)
   crypto.getRandomValues(array)
   for (let i = 0; i < pwdLength.value; i++) {
-    pwd += charset[array[i] % charset.length]!
+    const val = array[i]
+    if (val !== undefined) {
+      const charIndex = val % charset.length
+      pwd += charset.charAt(charIndex)
+    }
   }
   pwdResult.value = pwd
 }

@@ -1,21 +1,30 @@
 <template>
-  <div class="h-[calc(100vh-8rem)] flex flex-col gap-6">
-    <!-- Tools Navigation -->
-    <div class="flex gap-2 border-b border-gray-200 pb-2 overflow-x-auto">
-      <button 
-        v-for="tool in tools" 
-        :key="tool.id"
-        @click="currentTool = tool.id"
-        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2"
-        :class="currentTool === tool.id ? 'bg-blue-600 text-white shadow-sm' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'"
-      >
-        <component :is="tool.icon" class="w-4 h-4" />
-        {{ tool.name }}
-      </button>
-    </div>
+  <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-8rem)]">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full lg:w-64 flex-shrink-0 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+      <div class="p-4 border-b border-gray-100 bg-gray-50/50">
+        <h2 class="font-semibold text-gray-900 flex items-center gap-2">
+          <Palette class="w-4 h-4 text-blue-600" />
+          {{ $t('home.categories.design') }}
+        </h2>
+      </div>
+      <div class="flex-1 overflow-y-auto p-2 space-y-1">
+        <button 
+          v-for="tool in tools" 
+          :key="tool.id"
+          @click="currentTool = tool.id"
+          class="w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-3 text-left group"
+          :class="currentTool === tool.id ? 'bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-200' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+        >
+          <component :is="tool.icon" class="w-4 h-4" :class="currentTool === tool.id ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'" />
+          {{ tool.name }}
+        </button>
+      </div>
+    </aside>
 
     <!-- Content Area -->
-    <div class="flex-1 min-h-0 overflow-auto">
+    <main class="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col min-w-0">
+      <div class="p-6 h-full overflow-auto">
       
       <!-- 1. Image Converter -->
       <div v-if="currentTool === 'convert'" class="h-full flex flex-col gap-6">
@@ -343,13 +352,14 @@
       </div>
 
     </div>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Image, FileType, Upload, Download, CheckCircle, Minimize2, Edit3, RotateCcw, RotateCw, MoveHorizontal, MoveVertical, RefreshCcw, Sun, Moon, Stamp } from 'lucide-vue-next'
+import { Image, FileType, Upload, Download, CheckCircle, Minimize2, Edit3, RotateCcw, RotateCw, MoveHorizontal, MoveVertical, RefreshCcw, Sun, Moon, Stamp, Palette } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

@@ -84,7 +84,7 @@ import {
   Clock, Code2, Image, Scale, Bot, MoreHorizontal, 
   Wrench, Search, SearchX, Terminal, Palette, Coffee,
   FileJson, Hash, Link, Replace, Type, KeyRound, 
-  RotateCcw, FileType, Minimize2, Edit3, GitDiff, Stamp
+  FileType, Minimize2, Edit3, GitCompare, Stamp
 } from 'lucide-vue-next'
 
 const { t } = useI18n()
@@ -163,10 +163,10 @@ const categories = computed(() => [
         name: t('home.tools.diff.name'), 
         description: t('home.tools.diff.desc'), 
         path: '/dev-tools',
-        query: { tool: 'diff' },
-        icon: GitDiff,
-        color: 'bg-slate-600',
-        tags: ['Diff', 'Compare', 'Text'],
+         query: { tool: 'diff' },
+         icon: GitCompare,
+         color: 'bg-slate-600',
+         tags: ['Diff', 'Compare', 'Text'],
         new: true
       },
       { 
