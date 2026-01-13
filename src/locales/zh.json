@@ -11,7 +11,7 @@
     "imageTools": "图片工具箱",
     "unitConverter": "单位换算",
     "aiTools": "AI 聚合站",
-    "otherTools": "日常工具"
+    "docTools": "文档处理"
   },
   "home": {
     "heroTitle": "TechRock Tools",
@@ -22,6 +22,7 @@
     "categories": {
       "dev": "开发与编程",
       "design": "设计与媒体",
+      "doc": "文档与办公",
       "life": "日常与生活"
     },
     "tools": {
@@ -355,19 +356,47 @@
       "tempTitle": "温度"
     }
   },
-  "otherTools": {
-    "qr": {
-      "title": "二维码生成",
-      "placeholder": "输入文本或网址生成二维码...",
-      "waiting": "二维码将显示在这里",
-      "download": "下载二维码"
+  "docTools": {
+    "nav": {
+      "pdf": "PDF 工具",
+      "excel": "Excel 工具",
+      "ppt": "PPT 工具",
+      "word": "Word 工具"
     },
-    "color": {
-      "title": "颜色转换",
-      "select": "选择颜色",
-      "preview": "颜色预览",
-      "pickScreen": "屏幕吸色",
-      "notSupported": "您的浏览器不支持吸色功能"
+    "pdf": {
+      "title": "PDF 工具箱",
+      "sort": "PDF 排序/删除/旋转",
+      "merge": "PDF 合并",
+      "text": "提取文本",
+      "image": "PDF 转图片",
+      "upload": "上传 PDF 文件",
+      "uploadMultiple": "上传多个 PDF 文件",
+      "page": "第 {page} 页",
+      "rotate": "旋转",
+      "delete": "删除",
+      "moveUp": "上移",
+      "moveDown": "下移",
+      "download": "下载结果",
+      "processing": "处理中..."
+    },
+    "excel": {
+      "title": "Excel 工具箱",
+      "extractImages": "提取图片",
+      "toJson": "转 JSON",
+      "fixCsv": "CSV 乱码修复",
+      "convert": "格式转换 (XLSX/XLS)",
+      "toHtml": "转 HTML",
+      "upload": "上传 Excel/CSV 文件"
+    },
+    "ppt": {
+      "title": "PPT 工具箱",
+      "extractImages": "提取 PPT 图片",
+      "upload": "上传 PPTX 文件"
+    },
+    "word": {
+      "title": "Word 工具箱",
+      "extractImages": "提取 Word 图片",
+      "upload": "上传 DOCX 文件"
     }
   },
   "seo": {

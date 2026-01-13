@@ -72,14 +72,32 @@ import {
   Clock, Code2, Image, Scale, Bot, 
   Wrench, SearchX, Terminal, Palette, Coffee,
   FileJson, Hash, Link, Replace, Type, KeyRound, 
-  FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode
+  FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode,
+  FileText, FileSpreadsheet, Presentation, File
 } from 'lucide-vue-next'
+
+interface Tool {
+  name: string
+  description: string
+  path: string
+  query?: Record<string, string>
+  icon: any
+  color: string
+  tags: string[]
+  new?: boolean
+}
+
+interface Category {
+  title: string
+  icon: any
+  tools: Tool[]
+}
 
 const { t } = useI18n()
 const { searchQuery } = useSearch()
 
 // Tool Data with Categories
-const categories = computed(() => [
+const categories = computed<Category[]>(() => [
   {
     title: t('home.categories.dev'),
     icon: Terminal,
@@ -248,6 +266,48 @@ const categories = computed(() => [
         color: 'bg-violet-500',
         tags: ['ChatGPT', 'Midjourney', 'AI']
       },
+    ]
+  },
+  {
+    title: t('home.categories.doc'),
+    icon: FileText,
+    tools: [
+      {
+        name: t('docTools.pdf.title'),
+        description: t('docTools.pdf.sort'),
+        path: '/doc-tools',
+        query: { tab: 'pdf' },
+        icon: File,
+        color: 'bg-red-500',
+        tags: ['PDF', 'Merge', 'Sort', 'Rotate']
+      },
+      {
+        name: t('docTools.excel.title'),
+        description: t('docTools.excel.extractImages'),
+        path: '/doc-tools',
+        query: { tab: 'excel' },
+        icon: FileSpreadsheet,
+        color: 'bg-green-600',
+        tags: ['Excel', 'Images', 'Convert']
+      },
+      {
+        name: t('docTools.ppt.title'),
+        description: t('docTools.ppt.extractImages'),
+        path: '/doc-tools',
+        query: { tab: 'ppt' },
+        icon: Presentation,
+        color: 'bg-orange-500',
+        tags: ['PPT', 'Images', 'Extract']
+      },
+      {
+        name: t('docTools.word.title'),
+        description: t('docTools.word.extractImages'),
+        path: '/doc-tools',
+        query: { tab: 'word' },
+        icon: FileText,
+        color: 'bg-blue-600',
+        tags: ['Word', 'Images', 'Extract']
+      }
     ]
   },
   {

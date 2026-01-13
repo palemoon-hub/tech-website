@@ -39,9 +39,9 @@ const routes = [
         component: () => import('../views/AiTools.vue')
       },
       {
-        path: 'other-tools',
-        name: 'OtherTools',
-        component: () => import('../views/OtherTools.vue')
+        path: 'doc-tools',
+        name: 'DocTools',
+        component: () => import('../views/DocTools.vue')
       }
     ]
   }
@@ -67,7 +67,7 @@ router.beforeEach((to, _from, next) => {
       'ImageTools': t('nav.imageTools'),
       'UnitConverter': t('nav.unitConverter'),
       'AiTools': t('nav.aiTools'),
-      'OtherTools': t('nav.otherTools'),
+      'DocTools': t('nav.docTools'),
     }
     const pageTitle = nameMap[to.name as string]
     document.title = pageTitle ? `${pageTitle} - ${appTitle}` : appTitle

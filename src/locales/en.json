@@ -11,7 +11,7 @@
     "imageTools": "Image Tools",
     "unitConverter": "Unit Converter",
     "aiTools": "AI Hub",
-    "otherTools": "Daily Tools"
+    "docTools": "Doc Tools"
   },
   "home": {
     "heroTitle": "TechRock Tools",
@@ -22,6 +22,7 @@
     "categories": {
       "dev": "Development",
       "design": "Design & Media",
+      "doc": "Documents",
       "life": "Daily & Life"
     },
     "tools": {
@@ -380,19 +381,47 @@
       "tempTitle": "Temperature"
     }
   },
-  "otherTools": {
-    "qr": {
-      "title": "QR Code Generator",
-      "placeholder": "Enter text or URL to generate QR code...",
-      "waiting": "QR code will appear here",
-      "download": "Download QR Code"
+  "docTools": {
+    "nav": {
+      "pdf": "PDF Tools",
+      "excel": "Excel Tools",
+      "ppt": "PPT Tools",
+      "word": "Word Tools"
     },
-    "color": {
-      "title": "Color Converter",
-      "select": "Select Color",
-      "preview": "Color Preview",
-      "pickScreen": "Pick Screen Color",
-      "notSupported": "Your browser does not support EyeDropper API"
+    "pdf": {
+      "title": "PDF Toolbox",
+      "sort": "PDF Sort/Delete/Rotate",
+      "merge": "Merge PDF",
+      "text": "Extract Text",
+      "image": "PDF to Image",
+      "upload": "Upload PDF",
+      "uploadMultiple": "Upload Multiple PDFs",
+      "page": "Page {page}",
+      "rotate": "Rotate",
+      "delete": "Delete",
+      "moveUp": "Move Up",
+      "moveDown": "Move Down",
+      "download": "Download Result",
+      "processing": "Processing..."
+    },
+    "excel": {
+      "title": "Excel Toolbox",
+      "extractImages": "Extract Images",
+      "toJson": "To JSON",
+      "fixCsv": "Fix CSV Encoding",
+      "convert": "Convert (XLSX/XLS)",
+      "toHtml": "To HTML",
+      "upload": "Upload Excel/CSV"
+    },
+    "ppt": {
+      "title": "PPT Toolbox",
+      "extractImages": "Extract PPT Images",
+      "upload": "Upload PPTX"
+    },
+    "word": {
+      "title": "Word Toolbox",
+      "extractImages": "Extract Word Images",
+      "upload": "Upload DOCX"
     }
   },
   "seo": {

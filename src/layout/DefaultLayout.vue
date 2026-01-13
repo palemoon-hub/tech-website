@@ -132,7 +132,7 @@ import {
   Image, 
   Scale,
   Bot, 
-  MoreHorizontal,
+  FileText,
   Wrench,
   Globe,
   Heart,
@@ -167,8 +167,8 @@ const navItems = computed(() => [
   { name: t('nav.timestamp'), path: '/timestamp', icon: Clock },
   { name: t('nav.devTools'), path: '/dev-tools', icon: Code2 },
   { name: t('nav.imageTools'), path: '/image-tools', icon: Image },
+  { name: t('nav.docTools'), path: '/doc-tools', icon: FileText },
   { name: t('nav.unitConverter'), path: '/unit-converter', icon: Scale },
   { name: t('nav.aiTools'), path: '/ai-tools', icon: Bot },
-  { name: t('nav.otherTools'), path: '/other-tools', icon: MoreHorizontal },
 ])
 </script>
