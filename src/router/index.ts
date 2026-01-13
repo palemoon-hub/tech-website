@@ -54,24 +54,64 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const t = i18n.global.t
-  const title = to.meta.title as string
+  const routeName = to.name as string
   
-  if (title) {
-    document.title = title
-  } else if (to.name) {
-    const appTitle = t('app.title')
-    const nameMap: Record<string, string> = {
-      'Home': t('nav.dashboard'),
-      'Timestamp': t('nav.timestamp'),
-      'DevTools': t('nav.devTools'),
-      'ImageTools': t('nav.imageTools'),
-      'UnitConverter': t('nav.unitConverter'),
-      'AiTools': t('nav.aiTools'),
-      'DocTools': t('nav.docTools'),
-    }
-    const pageTitle = nameMap[to.name as string]
-    document.title = pageTitle ? `${pageTitle} - ${appTitle}` : appTitle
+  // Mapping from Route Name to Locale Key in "meta" section
+  const metaKeyMap: Record<string, string> = {
+    'Home': 'home',
+    'Timestamp': 'timestamp',
+    'DevTools': 'devTools',
+    'ImageTools': 'imageTools',
+    'UnitConverter': 'unitConverter',
+    'AiTools': 'aiTools',
+    'DocTools': 'docTools'
   }
+  
+  const metaKey = metaKeyMap[routeName]
+  
+  if (metaKey) {
+    const pageTitle = t(`meta.${metaKey}.title`)
+    const pageDesc = t(`meta.${metaKey}.description`)
+    const pageKeywords = t(`meta.${metaKey}.keywords`)
+    
+    // Set Title
+    document.title = pageTitle
+    
+    // Set Description
+    let descMeta = document.querySelector('meta[name="description"]')
+    if (!descMeta) {
+      descMeta = document.createElement('meta')
+      descMeta.setAttribute('name', 'description')
+      document.head.appendChild(descMeta)
+    }
+    descMeta.setAttribute('content', pageDesc)
+    
+    // Set Keywords
+    let keywordsMeta = document.querySelector('meta[name="keywords"]')
+    if (!keywordsMeta) {
+      keywordsMeta = document.createElement('meta')
+      keywordsMeta.setAttribute('name', 'keywords')
+      document.head.appendChild(keywordsMeta)
+    }
+    keywordsMeta.setAttribute('content', pageKeywords)
+
+    // Set OG Tags
+    const updateMetaTag = (selector: string, content: string) => {
+      let element = document.querySelector(selector)
+      if (element) {
+        element.setAttribute('content', content)
+      }
+    }
+    
+    updateMetaTag('meta[property="og:title"]', pageTitle)
+    updateMetaTag('meta[property="og:description"]', pageDesc)
+    
+  } else {
+    // Fallback
+    const appTitle = t('app.title')
+    document.title = appTitle
+  }
+  
   next()
 })
 

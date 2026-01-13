@@ -1,4 +1,41 @@
 {
+  "meta": {
+    "home": {
+      "title": "TechRock Tools - 免费在线开发者与设计师工具箱",
+      "keywords": "开发者工具, 在线工具, 时间戳转换, JSON格式化, 图片压缩, AI工具导航, 单位换算, 免费工具站",
+      "description": "TechRock Tools 提供一站式免费在线工具，包括时间戳转换、JSON 格式化、图片压缩、单位换算及 AI 工具导航，助您高效工作。"
+    },
+    "timestamp": {
+      "title": "在线时间戳转换工具 - Unix Timestamp Converter",
+      "keywords": "时间戳转换, Unix时间戳, 北京时间, UTC时间, 毫秒转换, 日期转时间戳",
+      "description": "免费在线时间戳转换工具，支持 Unix 时间戳与日期时间的相互转换，精确到毫秒，支持自动获取当前时间。"
+    },
+    "devTools": {
+      "title": "开发者工具箱 - JSON, Base64, 正则测试",
+      "keywords": "JSON格式化, Base64编码解码, URL编码, 哈希生成, 正则表达式测试, 文本对比, 开发者实用工具",
+      "description": "集成常用的开发者工具：JSON 格式化与校验、Base64/URL 编解码、Hash 哈希生成、正则表达式测试及文本差异对比。"
+    },
+    "imageTools": {
+      "title": "在线图片处理工具箱 - 压缩, 格式转换, 证件照",
+      "keywords": "图片压缩, 图片格式转换, 证件照换底, 图片水印, 图片编辑, PNG转JPG, WEBP转换, 在线修图",
+      "description": "强大的在线图片处理工具：支持图片无损压缩、格式互转（PNG/JPG/WEBP）、证件照制作与换底、添加水印及基础编辑功能。"
+    },
+    "unitConverter": {
+      "title": "在线单位换算器 - 长度, 重量, 温度, 数据存储",
+      "keywords": "单位换算, 长度转换, 重量转换, 温度转换, 数据存储换算, 面积转换, 体积转换, 计量单位",
+      "description": "全能在线单位换算器，支持长度、面积、体积、重量、温度及数据存储等多种常用单位的快速换算。"
+    },
+    "aiTools": {
+      "title": "AI 工具导航 - 全球热门 AI 生产力工具聚合",
+      "keywords": "AI工具导航, ChatGPT, Midjourney, AI写作, AI绘画, AI PPT, 生产力工具, 人工智能助手",
+      "description": "精选全球热门 AI 工具导航，涵盖 AI 写作、AI 绘画、AI PPT 生成及代码辅助等领域，助您探索 AI 生产力。"
+    },
+    "docTools": {
+      "title": "文档处理工具箱 - PDF, Word, Excel, PPT",
+      "keywords": "PDF工具, PDF合并, PDF转图片, Word图片提取, Excel转JSON, PPT图片提取, 在线文档处理",
+      "description": "在线文档处理工具集：支持 PDF 合并与转换、Word/PPT/Excel 图片批量提取、Excel 转 JSON 等实用功能。"
+    }
+  },
   "app": {
     "title": "TechRock Tools",
     "dashboard": "仪表盘",
