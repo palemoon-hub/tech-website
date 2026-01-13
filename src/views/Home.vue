@@ -1,18 +1,34 @@
 <template>
   <div class="space-y-10">
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
       <div class="absolute top-0 right-0 opacity-10 pointer-events-none">
         <Wrench class="w-64 h-64 -mr-16 -mt-16" />
       </div>
       
-      <div class="relative z-10 max-w-2xl">
-        <h1 class="text-3xl md:text-5xl font-bold mb-4">{{ $t('home.heroTitle') }}</h1>
-        <p class="text-blue-100 text-lg leading-relaxed">
-          {{ $t('home.heroDesc') }}
-        </p>
+      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Left: Title & Desc -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">{{ $t('home.heroTitle') }}</h1>
+          <p class="text-blue-100 text-base leading-relaxed">
+            {{ $t('home.heroDesc') }}
+          </p>
+        </div>
+
+        <!-- Right: Support Button -->
+        <div class="flex-shrink-0">
+          <button 
+            @click="isSupportOpen = true"
+            class="flex items-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm font-bold group"
+          >
+            <Heart class="w-5 h-5 text-pink-400 group-hover:scale-110 transition-transform" />
+            <span>{{ $t('support.title') }}</span>
+          </button>
+        </div>
       </div>
     </div>
+    
+    <SupportModal :isOpen="isSupportOpen" @close="isSupportOpen = false" />
 
     <!-- Tool Sections -->
     <div v-if="filteredCategories.length > 0" class="space-y-8">
@@ -65,15 +81,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useSearch } from '../composables/useSearch'
+import SupportModal from '../components/SupportModal.vue'
 import { 
   Clock, Code2, Image, Scale, Bot, 
   Wrench, SearchX, Terminal, Palette, Coffee,
   FileJson, Hash, Link, Replace, Type, KeyRound, 
   FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode,
-  FileText, FileSpreadsheet, Presentation, File
+  FileText, FileSpreadsheet, Presentation, File,
+  Heart
 } from 'lucide-vue-next'
 
 interface Tool {
@@ -95,6 +113,7 @@ interface Category {
 
 const { t } = useI18n()
 const { searchQuery } = useSearch()
+const isSupportOpen = ref(false)
 
 // Tool Data with Categories
 const categories = computed<Category[]>(() => [

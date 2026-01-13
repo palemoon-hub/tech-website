@@ -54,14 +54,6 @@
             >
               <Globe class="w-5 h-5" />
             </button>
-            
-            <button 
-              @click="isSupportOpen = true"
-              class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm font-medium whitespace-nowrap"
-            >
-              <Heart class="w-4 h-4 fill-current" />
-              <span class="hidden sm:inline">{{ $t('support.title') }}</span>
-            </button>
           </div>
         </div>
       </div>
@@ -99,8 +91,6 @@
       </nav>
     </div>
 
-    <SupportModal :is-open="isSupportOpen" @close="isSupportOpen = false" />
-
     <!-- Main Content -->
     <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <router-view v-slot="{ Component }">
@@ -123,10 +113,8 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import SupportModal from '../components/SupportModal.vue'
 import { useSearch } from '../composables/useSearch'
 import { 
-  LayoutDashboard, 
   Clock, 
   Code2, 
   Image, 
@@ -135,15 +123,14 @@ import {
   FileText,
   Wrench,
   Globe,
-  Heart,
   Search
 } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 const { t, locale } = useI18n()
-const isSupportOpen = ref(false)
 const { searchQuery } = useSearch()
+const isSupportOpen = ref(false)
 
 const toggleLanguage = () => {
   locale.value = locale.value === 'en' ? 'zh' : 'en'
@@ -163,7 +150,6 @@ watch(searchQuery, (newVal) => {
 })
 
 const navItems = computed(() => [
-  { name: t('nav.dashboard'), path: '/', icon: LayoutDashboard },
   { name: t('nav.timestamp'), path: '/timestamp', icon: Clock },
   { name: t('nav.devTools'), path: '/dev-tools', icon: Code2 },
   { name: t('nav.imageTools'), path: '/image-tools', icon: Image },
