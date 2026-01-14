@@ -34,6 +34,11 @@
       "title": "Document Tools - PDF, Word, Excel, PPT",
       "keywords": "pdf tools, merge pdf, pdf to image, extract images from word, excel to json, ppt image extractor",
       "description": "Online document processing tools: PDF merge & convert, batch image extraction from Word/PPT/Excel, Excel to JSON conversion."
+    },
+    "horoscope": {
+      "title": "Daily Horoscope - Free Online Zodiac Signs Readings",
+      "keywords": "horoscope, zodiac signs, daily horoscope, aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces, astrology",
+      "description": "Free online daily horoscope readings for all 12 zodiac signs. Discover your daily fortune, lucky numbers, and colors."
     }
   },
   "app": {
@@ -150,6 +155,10 @@
       "otherTools": {
         "name": "Daily Tools",
         "desc": "QR code generator, Color format conversion (HEX/RGB)."
+      },
+      "horoscope": {
+        "name": "Horoscope",
+        "desc": "Daily horoscope readings, love, career, and wealth analysis."
       }
     }
   },
@@ -482,5 +491,61 @@
     "title": "TechRock Tools - Free Online Developer & Designer Toolbox",
     "keywords": "developer tools, online tools, timestamp converter, json formatter, image compression, id photo background, unit converter, ai tools, techrock, free tools",
     "description": "TechRock Tools (teckrock.top) provides free all-in-one online tools including timestamp conversion, JSON formatting, image processing, and AI tool navigation to boost your productivity."
+  },
+  "horoscope": {
+    "title": "Horoscope",
+    "subtitle": "Discover Your Daily Destiny",
+    "signs": {
+      "aries": "Aries",
+      "taurus": "Taurus",
+      "gemini": "Gemini",
+      "cancer": "Cancer",
+      "leo": "Leo",
+      "virgo": "Virgo",
+      "libra": "Libra",
+      "scorpio": "Scorpio",
+      "sagittarius": "Sagittarius",
+      "capricorn": "Capricorn",
+      "aquarius": "Aquarius",
+      "pisces": "Pisces"
+    },
+    "dates": {
+      "aries": "Mar 21 - Apr 19",
+      "taurus": "Apr 20 - May 20",
+      "gemini": "May 21 - Jun 20",
+      "cancer": "Jun 21 - Jul 22",
+      "leo": "Jul 23 - Aug 22",
+      "virgo": "Aug 23 - Sep 22",
+      "libra": "Sep 23 - Oct 22",
+      "scorpio": "Oct 23 - Nov 21",
+      "sagittarius": "Nov 22 - Dec 21",
+      "capricorn": "Dec 22 - Jan 19",
+      "aquarius": "Jan 20 - Feb 18",
+      "pisces": "Feb 19 - Mar 20"
+    },
+    "fields": {
+      "luckyColor": "Lucky Color",
+      "luckyNumber": "Lucky Number",
+      "overall": "Overall",
+      "health": "Health",
+      "love": "Love",
+      "work": "Career",
+      "money": "Money",
+      "summary": "Daily Summary"
+    },
+    "summaries": [
+      "Today is a day of new beginnings. Embrace the changes coming your way.",
+      "Focus on your personal growth. A small step today leads to a giant leap tomorrow.",
+      "Your creative energy is high. Use it to solve problems that have been bothering you.",
+      "Patience is key today. Good things come to those who wait.",
+      "Reconnect with an old friend. Social interactions will bring you joy.",
+      "Financial opportunities are on the horizon. Keep your eyes open.",
+      "Take some time for self-care. Your health is your wealth.",
+      "Trust your intuition. It will guide you in the right direction.",
+      "A surprise is waiting for you. Be open to the unexpected.",
+      "Hard work will pay off. Recognition is coming soon.",
+      "Balance is essential. Don't overwork yourself.",
+      "Love is in the air. Open your heart to new possibilities."
+    ]
   }
 }

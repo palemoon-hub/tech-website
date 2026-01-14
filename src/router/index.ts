@@ -42,6 +42,11 @@ const routes = [
         path: 'doc-tools',
         name: 'DocTools',
         component: () => import('../views/DocTools.vue')
+      },
+      {
+        path: 'horoscope',
+        name: 'Horoscope',
+        component: () => import('../views/Horoscope.vue')
       }
     ]
   }
@@ -64,7 +69,8 @@ router.beforeEach((to, _from, next) => {
     'ImageTools': 'imageTools',
     'UnitConverter': 'unitConverter',
     'AiTools': 'aiTools',
-    'DocTools': 'docTools'
+    'DocTools': 'docTools',
+    'Horoscope': 'horoscope'
   }
   
   const metaKey = metaKeyMap[routeName]

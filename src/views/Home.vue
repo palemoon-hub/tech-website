@@ -91,7 +91,7 @@ import {
   FileJson, Hash, Link, Replace, Type, KeyRound, 
   FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode,
   FileText, FileSpreadsheet, Presentation, File,
-  Heart, ShieldCheck
+  Heart, ShieldCheck, Star
 } from 'lucide-vue-next'
 
 interface Tool {
@@ -350,6 +350,15 @@ const categories = computed<Category[]>(() => [
         icon: Scale,
         color: 'bg-orange-500',
         tags: ['Metric', 'Imperial', 'Data']
+      },
+      { 
+        name: t('home.tools.horoscope.name'), 
+        description: t('home.tools.horoscope.desc'), 
+        path: '/horoscope',
+        icon: Star,
+        color: 'bg-purple-500',
+        tags: ['Horoscope', 'Fortune', 'Zodiac'],
+        new: true
       },
     ]
   }
