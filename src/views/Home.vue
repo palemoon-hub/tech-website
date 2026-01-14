@@ -91,7 +91,7 @@ import {
   FileJson, Hash, Link, Replace, Type, KeyRound, 
   FileType, Minimize2, Edit3, GitCompare, Stamp, QrCode,
   FileText, FileSpreadsheet, Presentation, File,
-  Heart
+  Heart, ShieldCheck
 } from 'lucide-vue-next'
 
 interface Tool {
@@ -137,6 +137,16 @@ const categories = computed<Category[]>(() => [
         icon: FileJson,
         color: 'bg-orange-500',
         tags: ['JSON', 'Format', 'Minify']
+      },
+      { 
+        name: t('home.tools.jwt.name'), 
+        description: t('home.tools.jwt.desc'), 
+        path: '/dev-tools',
+        query: { tool: 'jwt' },
+        icon: ShieldCheck,
+        color: 'bg-rose-500',
+        tags: ['JWT', 'Decode', 'Sign'],
+        new: true
       },
       { 
         name: t('home.tools.text.name'), 

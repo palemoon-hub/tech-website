@@ -45,6 +45,77 @@
         </div>
       </div>
 
+      <!-- 2. JWT -->
+      <div v-if="currentTool === 'jwt'" class="h-full flex flex-col gap-4">
+        <div class="flex gap-2 border-b border-gray-200 pb-2">
+          <button @click="jwtMode = 'decode'" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors" :class="jwtMode === 'decode' ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'">
+            {{ $t('devTools.jwt.decode') }}
+          </button>
+          <button @click="jwtMode = 'encode'" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors" :class="jwtMode === 'encode' ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'">
+            {{ $t('devTools.jwt.encode') }}
+          </button>
+        </div>
+
+        <!-- Decode Mode -->
+        <div v-if="jwtMode === 'decode'" class="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+          <div class="flex-1 flex flex-col gap-2">
+            <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.token') }}</label>
+            <textarea v-model="jwtInput" class="flex-1 w-full p-4 font-mono text-sm border border-gray-300 rounded-lg resize-none" placeholder="eyJ..."></textarea>
+          </div>
+          <div class="flex-1 flex flex-col gap-4 overflow-y-auto">
+             <div v-if="jwtError" class="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100">
+               {{ jwtError }}
+             </div>
+             <div class="flex-1 flex flex-col gap-2">
+               <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.header') }}</label>
+               <textarea readonly :value="jwtDecodedHeader" class="h-32 p-4 font-mono text-sm bg-gray-50 border border-gray-300 rounded-lg resize-none text-gray-800"></textarea>
+             </div>
+             <div class="flex-[2] flex flex-col gap-2">
+               <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.payload') }}</label>
+               <textarea readonly :value="jwtDecodedPayload" class="flex-1 p-4 font-mono text-sm bg-gray-50 border border-gray-300 rounded-lg resize-none text-gray-800"></textarea>
+             </div>
+             <div class="h-20 flex flex-col gap-2">
+               <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.signature') }}</label>
+               <textarea readonly :value="jwtDecodedSignature" class="flex-1 p-4 font-mono text-sm bg-gray-50 border border-blue-100 text-blue-800 rounded-lg resize-none"></textarea>
+             </div>
+          </div>
+        </div>
+
+        <!-- Encode Mode -->
+        <div v-else class="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+           <div class="flex-1 flex flex-col gap-4 overflow-y-auto">
+             <div class="flex-1 flex flex-col gap-2">
+               <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.header') }}</label>
+               <textarea v-model="jwtEncodeHeader" class="h-32 p-4 font-mono text-sm border border-gray-300 rounded-lg resize-none"></textarea>
+             </div>
+             <div class="flex-[2] flex flex-col gap-2">
+               <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.payload') }}</label>
+               <textarea v-model="jwtEncodePayload" class="flex-1 p-4 font-mono text-sm border border-gray-300 rounded-lg resize-none"></textarea>
+             </div>
+             <div class="flex flex-col gap-2">
+               <div class="flex gap-4">
+                 <div class="flex-1">
+                   <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.secret') }}</label>
+                   <input v-model="jwtEncodeSecret" type="text" class="w-full mt-1 p-2 border border-gray-300 rounded-lg text-sm" placeholder="secret">
+                 </div>
+                 <div class="w-32">
+                   <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.algo') }}</label>
+                   <select v-model="jwtEncodeAlgo" class="w-full mt-1 p-2 border border-gray-300 rounded-lg text-sm bg-white">
+                     <option value="HS256">HS256</option>
+                     <option value="HS384">HS384</option>
+                     <option value="HS512">HS512</option>
+                   </select>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="flex-1 flex flex-col gap-2">
+             <label class="text-sm font-medium text-gray-700">{{ $t('devTools.jwt.token') }}</label>
+             <textarea readonly :value="jwtEncodedToken" class="flex-1 w-full p-4 font-mono text-sm bg-gray-50 border border-gray-300 rounded-lg resize-none text-gray-800 break-all"></textarea>
+           </div>
+        </div>
+      </div>
+
       <!-- 2. Diff -->
       <div v-if="currentTool === 'diff'" class="h-full flex flex-col gap-4">
         <div class="grid grid-cols-2 gap-4 flex-1 min-h-0">
@@ -296,7 +367,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CryptoJS from 'crypto-js'
 import * as Diff from 'diff'
-import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare, Terminal, QrCode, Download } from 'lucide-vue-next'
+import { FileJson, Hash, Link, Code2, Replace, Type, KeyRound, GitCompare, Terminal, QrCode, Download, ShieldCheck } from 'lucide-vue-next'
 import QRCode from 'qrcode'
 import { useI18n } from 'vue-i18n'
 
@@ -307,6 +378,7 @@ const currentTool = ref('json')
 
 const tools = computed(() => [
   { id: 'json', name: t('devTools.nav.json'), icon: FileJson },
+  { id: 'jwt', name: t('devTools.nav.jwt'), icon: ShieldCheck },
   { id: 'diff', name: t('devTools.nav.diff'), icon: GitCompare },
   { id: 'base64', name: t('devTools.nav.base64'), icon: Code2 },
   { id: 'url', name: t('devTools.nav.url'), icon: Link },
@@ -338,6 +410,84 @@ const jsonInput = ref('')
 const jsonOutput = ref('')
 const jsonFormat = () => { try { jsonOutput.value = JSON.stringify(JSON.parse(jsonInput.value), null, 2) } catch(e:any) { jsonOutput.value = e.message } }
 const jsonMinify = () => { try { jsonOutput.value = JSON.stringify(JSON.parse(jsonInput.value)) } catch(e:any) { jsonOutput.value = e.message } }
+
+// JWT
+const jwtMode = ref('decode')
+const jwtInput = ref('')
+const jwtEncodeHeader = ref('{\n  "alg": "HS256",\n  "typ": "JWT"\n}')
+const jwtEncodePayload = ref('{\n  "sub": "1234567890",\n  "name": "John Doe",\n  "iat": 1516239022\n}')
+const jwtEncodeSecret = ref('secret')
+const jwtEncodeAlgo = ref('HS256')
+
+const jwtError = ref('')
+
+const jwtDecoded = computed(() => {
+  jwtError.value = ''
+  if (!jwtInput.value) return { header: '', payload: '', signature: '' }
+  try {
+    const parts = jwtInput.value.split('.')
+    if (parts.length !== 3) {
+      jwtError.value = t('devTools.jwt.invalid')
+      return { header: '', payload: '', signature: '' }
+    }
+    
+    const decodeBase64Url = (str: string) => {
+      let output = str.replace(/-/g, '+').replace(/_/g, '/')
+      switch (output.length % 4) {
+        case 0: break
+        case 2: output += '=='; break
+        case 3: output += '='; break
+        default: throw 'Illegal base64url string!'
+      }
+      return decodeURIComponent(escape(window.atob(output)))
+    }
+
+    const header = JSON.stringify(JSON.parse(decodeBase64Url(parts[0] || '')), null, 2)
+    const payload = JSON.stringify(JSON.parse(decodeBase64Url(parts[1] || '')), null, 2)
+    return { header, payload, signature: parts[2] }
+  } catch (e) {
+    jwtError.value = t('devTools.jwt.invalid')
+    return { header: '', payload: '', signature: '' }
+  }
+})
+
+const jwtDecodedHeader = computed(() => jwtDecoded.value.header)
+const jwtDecodedPayload = computed(() => jwtDecoded.value.payload)
+const jwtDecodedSignature = computed(() => jwtDecoded.value.signature)
+
+const jwtEncodedToken = computed(() => {
+  try {
+    const base64url = (source: CryptoJS.lib.WordArray) => {
+      let encodedSource = CryptoJS.enc.Base64.stringify(source)
+      encodedSource = encodedSource.replace(/=+$/, '')
+      encodedSource = encodedSource.replace(/\+/g, '-')
+      encodedSource = encodedSource.replace(/\//g, '_')
+      return encodedSource
+    }
+
+    const header = CryptoJS.enc.Utf8.parse(jwtEncodeHeader.value)
+    const payload = CryptoJS.enc.Utf8.parse(jwtEncodePayload.value)
+    
+    const encodedHeader = base64url(header)
+    const encodedPayload = base64url(payload)
+    
+    const signatureInput = encodedHeader + "." + encodedPayload
+    let signature: CryptoJS.lib.WordArray
+    
+    if (jwtEncodeAlgo.value === 'HS256') {
+      signature = CryptoJS.HmacSHA256(signatureInput, jwtEncodeSecret.value)
+    } else if (jwtEncodeAlgo.value === 'HS384') {
+      signature = CryptoJS.HmacSHA384(signatureInput, jwtEncodeSecret.value)
+    } else {
+      signature = CryptoJS.HmacSHA512(signatureInput, jwtEncodeSecret.value)
+    }
+    
+    const encodedSignature = base64url(signature)
+    return `${encodedHeader}.${encodedPayload}.${encodedSignature}`
+  } catch (e) {
+    return 'Error'
+  }
+})
 
 // Diff
 const diffOld = ref('')

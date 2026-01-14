@@ -75,6 +75,10 @@
         "name": "JSON 工具",
         "desc": "在线格式化、校验、压缩 JSON 数据。"
       },
+      "jwt": {
+        "name": "JWT 工具",
+        "desc": "JWT Token 解码、签名验证与生成。"
+      },
       "base64": {
         "name": "Base64 工具",
         "desc": "Base64 在线编码和解码。"
@@ -176,12 +180,27 @@
   "devTools": {
     "nav": {
       "json": "JSON 工具",
+      "jwt": "JWT 工具",
       "base64": "Base64",
       "url": "URL 编解码",
-      "hash": "哈希/加密",
+      "hash": "哈希生成",
       "regex": "正则测试",
+      "text": "文本工具",
       "diff": "文本对比",
-      "qr": "二维码生成"
+      "qr": "二维码",
+      "generator": "生成器"
+    },
+    "jwt": {
+      "decode": "解码",
+      "encode": "编码/签名",
+      "token": "JWT Token",
+      "header": "Header (头部)",
+      "payload": "Payload (负载)",
+      "signature": "Signature (签名)",
+      "secret": "Secret (密钥)",
+      "algo": "算法",
+      "invalid": "无效的 JWT Token",
+      "decoded": "解码结果"
     },
     "diff": {
       "original": "原始文本",

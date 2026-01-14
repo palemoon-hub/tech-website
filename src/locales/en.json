@@ -75,6 +75,10 @@
         "name": "JSON Tools",
         "desc": "Format, validate, and minify JSON data."
       },
+      "jwt": {
+        "name": "JWT Tools",
+        "desc": "Decode, sign, and verify JWT tokens."
+      },
       "base64": {
         "name": "Base64 Tool",
         "desc": "Encode and decode Base64 strings."
@@ -176,6 +180,7 @@
   "devTools": {
     "nav": {
       "json": "JSON Tools",
+      "jwt": "JWT Tools",
       "base64": "Base64",
       "url": "URL Encode/Decode",
       "hash": "Hash/Crypto",
@@ -184,6 +189,18 @@
       "qr": "QR Code",
       "text": "Text Utilities",
       "generator": "Generators"
+    },
+    "jwt": {
+      "decode": "Decode",
+      "encode": "Encode/Sign",
+      "token": "JWT Token",
+      "header": "Header",
+      "payload": "Payload",
+      "signature": "Signature",
+      "secret": "Secret",
+      "algo": "Algorithm",
+      "invalid": "Invalid JWT Token",
+      "decoded": "Decoded Result"
     },
     "diff": {
       "original": "Original Text",
